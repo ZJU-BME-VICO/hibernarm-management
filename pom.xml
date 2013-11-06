@@ -7,6 +7,69 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hibernarm-management Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	<properties>
+		
+		<spring.framework.version>3.2.2.RELEASE</spring.framework.version>
+		<hibernate.version>4.2.7.Final</hibernate.version>
+	</properties>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<env>dev</env>
+				<tomcat.url>http://localhost:9090/manager/text</tomcat.url>
+				<database.url>jdbc:sqlserver://localhost:1433;DatabaseName=hibernarm-management</database.url>
+				<database.username>sa</database.username>
+				<database.password>123456</database.password>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>production</id>
+			<properties>
+				<env>production</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<env>test</env>
+				<tomcat.url>http://172.17.0.71:9090/manager/text</tomcat.url>
+				<database.url>jdbc:sqlserver://172.17.0.71:1433;DatabaseName=hibernarm-management</database.url>
+				<database.username>sa</database.username>
+				<database.password>Sql0808</database.password>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<url>${tomcat.url}</url>
+					<username>admin</username>
+					<password>admin</password>
+					<path>/hibernarm-management</path>
+					<charset>utf-8</charset>
+					<uriEncoding>utf-8</uriEncoding>
+					<port>9091</port>
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -22,10 +85,17 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.2.7.Final</version>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.framework.version}</version>
 		</dependency>
 	</dependencies>
-	<build>
-		<finalName>hibernarm-management</finalName>
-	</build>
 </project>
