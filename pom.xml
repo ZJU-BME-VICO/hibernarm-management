@@ -7,11 +7,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hibernarm-management Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	
 	<properties>
-		
 		<spring.framework.version>3.2.2.RELEASE</spring.framework.version>
 		<hibernate.version>4.2.7.Final</hibernate.version>
 	</properties>
+	
 	<profiles>
 		<profile>
 			<id>dev</id>
@@ -20,7 +21,7 @@
 				<tomcat.url>http://localhost:9090/manager/text</tomcat.url>
 				<database.url>jdbc:sqlserver://localhost:1433;DatabaseName=hibernarm-management</database.url>
 				<database.username>sa</database.username>
-				<database.password>123456</database.password>
+				<database.password>sa</database.password>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -70,6 +71,7 @@
 			</resource>
 		</resources>
 	</build>
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
