@@ -7,8 +7,9 @@
 <title>CDRSearch</title>
 </head>
 <body>
-   <form>
-     <input></input>搜索
+   <form method="post" action="/hibernarm-management/home/archetypeNameSearch.action">
+     <input type="text" name="condition"></input>
+     <input type="submit" value="search" >    
    </form>
 </body>
 </html>

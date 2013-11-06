@@ -17,6 +17,13 @@ public class ArchetypeBean implements Serializable{
 	private String content;
 	private Date modifyTime;
     private String description;
+    public ArchetypeBean(){
+    	
+    }
+    public ArchetypeBean(String name,String description){
+    	this.name=name;
+    	this.description=description;
+    }
     @Lob
 	public String getDescription() {
 		return description;

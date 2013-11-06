@@ -7,7 +7,7 @@
 			<result name="success">/WEB-INF/view/search.jsp</result>
 		</action>
 		<action name="archetypeNameSearch" class="org.hibernarm.management.action.SearchArchetypeOnlyNameAction">
-			<result name="success">/WEB-INF/view/search.jsp</result>
+			<result name="success">/WEB-INF/view/archetypeResult.jsp</result>
 		</action>
 	</package>
 </struts>

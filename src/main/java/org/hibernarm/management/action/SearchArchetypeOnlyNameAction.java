@@ -2,11 +2,16 @@ package org.hibernarm.management.action;
 
 import java.util.List;
 
+import org.hibernarm.management.dao.impl.ArchetypeBeanDaoHibernateImpl;
+import org.hibernarm.management.dao.virtual.ArchetypeBeanDao;
+import org.hibernarm.management.model.ArchetypeBean;
+
 public class SearchArchetypeOnlyNameAction {
 	private String condition;
-	private List<String> nameList;
+	private List<ArchetypeBean> archetypeBeanList;
+	private static ArchetypeBeanDao archetypeBeanDao=new ArchetypeBeanDaoHibernateImpl();
 	public String execute(){
-		
+		archetypeBeanList=archetypeBeanDao.matchProbableByNamePart(condition);
 		return "success";
 	}
 	public String getCondition() {
@@ -15,12 +20,11 @@ public class SearchArchetypeOnlyNameAction {
 	public void setCondition(String condition) {
 		this.condition = condition;
 	}
-	public List<String> getNameList() {
-		return nameList;
+	public List<ArchetypeBean> getArchetypeBeanList() {
+		return archetypeBeanList;
 	}
-	public void setNameList(List<String> nameList) {
-		this.nameList = nameList;
+	public void setArchetypeBeanList(List<ArchetypeBean> archetypeBeanList) {
+		this.archetypeBeanList = archetypeBeanList;
 	}
-	
 
 }
