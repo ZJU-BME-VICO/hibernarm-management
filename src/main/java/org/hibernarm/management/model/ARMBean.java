@@ -1,5 +1,6 @@
 package org.hibernarm.management.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 @Entity
-public class ARM {
+public class ARMBean implements Serializable{
 	private Integer id;
 	private String name;
 	private String content;

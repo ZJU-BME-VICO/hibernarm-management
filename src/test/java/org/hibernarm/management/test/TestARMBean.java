@@ -2,16 +2,13 @@ package org.hibernarm.management.test;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import org.hibernarm.management.model.ARM;
 import org.hibernarm.management.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
 
-public class TestARM extends ArchetypeTestBase{
+public class TestARMBean extends ArchetypeTestBase{
 	   @Test
        public void testARM() throws ParseException, IOException{
 //   	    ARM bean=new ARM();

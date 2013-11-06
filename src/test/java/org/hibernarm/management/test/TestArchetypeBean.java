@@ -15,8 +15,8 @@ public class TestArchetypeBean extends ArchetypeTestBase{
 	@Test
 	public void testSaveArchetypeBean() throws ParseException, IOException{
 //		ArchetypeBean bean=new ArchetypeBean();
-//		bean.setContent("第一个");
-//		bean.setName("第一个");
+//		bean.setContent("锟斤拷一锟斤拷");
+//		bean.setName("锟斤拷一锟斤拷");
 //		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //		Date date=format.parse("2013-12-23 12:20:20");
 //		bean.setModifyTime(date);
@@ -24,7 +24,7 @@ public class TestArchetypeBean extends ArchetypeTestBase{
 		Session session=HibernateUtil.currentSession();
 		Transaction tx=session.getTransaction();
 		tx.begin();
-		session.save(archetypes.get("openEHR-EHR-OBSERVATION.blood_pressure.v1"));
+		session.save(archetypes.get("openEHR-EHR-OBSERVATION.blood_pressure.v2"));
 		tx.commit();
 		HibernateUtil.closeSession();
 		

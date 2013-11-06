@@ -47,7 +47,7 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">update</property>
 		<mapping class="org.hibernarm.management.model.ArchetypeBean"/>
-        <mapping class="org.hibernarm.management.model.ARM"/>
+        <mapping class="org.hibernarm.management.model.ARMBean"/>
 	</session-factory>
 
 </hibernate-configuration>

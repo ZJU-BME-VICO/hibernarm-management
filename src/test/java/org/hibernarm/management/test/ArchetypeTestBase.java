@@ -8,23 +8,23 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.hibernarm.management.model.ARM;
+import org.hibernarm.management.model.ARMBean;
 import org.hibernarm.management.model.ArchetypeBean;
 
 public class ArchetypeTestBase {
 	protected static Map<String, ArchetypeBean> archetypes = new HashMap<String, ArchetypeBean>();
-	protected static Map<String, ARM> arms = new HashMap<String, ARM>();
+	protected static Map<String, ARMBean> arms = new HashMap<String, ARMBean>();
 
 	protected static void initial() throws IOException {
 		ArchetypeBean archetype = new ArchetypeBean();
-		archetype.setName("openEHR-EHR-OBSERVATION.blood_pressure.v1");
-		archetype.setContent(readLines("org/hibernarm/management/test/openEHR-EHR-OBSERVATION.blood_pressure.v1.adl"));
-		archetypes.put("openEHR-EHR-OBSERVATION.blood_pressure.v1", archetype);
+		archetype.setName("openEHR-EHR-OBSERVATION.blood_pressure.v2");
+		archetype.setContent(readLines("org/hibernarm/management/test/openEHR-EHR-OBSERVATION.blood_pressure.v2.adl"));
+		archetypes.put("openEHR-EHR-OBSERVATION.blood_pressure.v2", archetype);
 
-		ARM arm = new ARM();
-		arm.setName("openEHR-EHR-OBSERVATION.blood_pressure.v1");
-		arm.setContent(readLines("org/hibernarm/management/test/openEHR-EHR-OBSERVATION.blood_pressure.v1.arm.xml"));
-		arms.put("openEHR-EHR-OBSERVATION.blood_pressure.v1", arm);
+		ARMBean arm = new ARMBean();
+		arm.setName("openEHR-EHR-OBSERVATION.blood_pressure.v2");
+		arm.setContent(readLines("org/hibernarm/management/test/openEHR-EHR-OBSERVATION.blood_pressure.v2.arm.xml"));
+		arms.put("openEHR-EHR-OBSERVATION.blood_pressure.v2", arm);
 	}
 
 //	protected void createTestBase() throws IOException {
