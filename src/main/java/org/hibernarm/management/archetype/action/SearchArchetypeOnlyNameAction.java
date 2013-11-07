@@ -1,4 +1,4 @@
-package org.hibernarm.management.action;
+package org.hibernarm.management.archetype.action;
 
 import java.util.List;
 

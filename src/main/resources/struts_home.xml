@@ -3,10 +3,10 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<package name="home" extends="struts-default" namespace="/home">
-		<action name="homeSearch" class="org.hibernarm.management.action.HomeAction">
+		<action name="homeSearch" class="org.hibernarm.management.archetype.action.HomeAction">
 			<result name="success">/WEB-INF/view/search.jsp</result>
 		</action>
-		<action name="archetypeNameSearch" class="org.hibernarm.management.action.SearchArchetypeOnlyNameAction">
+		<action name="archetypeNameSearch" class="org.hibernarm.management.archetype.action.SearchArchetypeOnlyNameAction">
 			<result name="success">/WEB-INF/view/archetypeResult.jsp</result>
 		</action>
 	</package>
