@@ -15,7 +15,7 @@ public class FileUtil {
 			StringBuffer content = new StringBuffer();
 			String singleLine = "";
 			while ((singleLine = reader.readLine()) != null) {
-				content.append(singleLine);
+				content.append(singleLine+"\n");
 			}
 			fileContent = content.toString();
 		}catch(Exception e){

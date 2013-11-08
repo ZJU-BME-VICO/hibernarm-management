@@ -73,7 +73,7 @@
 							<sourceRoot>${basedir}/target/generated-sources</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<wsdl>http://localhost:9090/hibernarm-service/AQLExecute?wsdl</wsdl>
+									<wsdl>http://localhost:9091/hibernarm-service/AQLExecute?wsdl</wsdl>
 								</wsdlOption>
 							</wsdlOptions>
 						</configuration>
