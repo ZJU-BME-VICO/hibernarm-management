@@ -22,9 +22,9 @@ public class ArchetypeTestBase {
 		archetypes.put("openEHR-EHR-OBSERVATION.blood_pressure.v2", archetype);
 
 		ARMBean arm = new ARMBean();
-		arm.setName("openEHR-EHR-OBSERVATION.blood_pressure.v2");
-		arm.setContent(readLines("org/hibernarm/management/test/openEHR-EHR-OBSERVATION.blood_pressure.v2.arm.xml"));
-		arms.put("openEHR-EHR-OBSERVATION.blood_pressure.v2", arm);
+		arm.setName("openEHR-EHR-OBSERVATION.blood_pressure.v1");
+		arm.setContent(readLines("org/hibernarm/management/test/openEHR-EHR-OBSERVATION.blood_pressure.v1.arm.xml"));
+		arms.put("openEHR-EHR-OBSERVATION.blood_pressure.v1", arm);
 	}
 
 //	protected void createTestBase() throws IOException {

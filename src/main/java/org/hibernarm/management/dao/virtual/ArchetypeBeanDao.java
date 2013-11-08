@@ -21,4 +21,11 @@ public interface ArchetypeBeanDao {
 
 	List<ArchetypeBean> matchProbableByNamePagingPart(String name,
 			int sequenceOfPage, int perPageAmount);
+	/*
+	 * @bleachzou according name  find whether the passed ArchetypeBean is exist,
+	 * if it is exist then update it,otherwise insert a new one
+	 */
+	void saveOrUpdate(ArchetypeBean bean);
+	ArchetypeBean selectByName(String name);
+	
 }

@@ -29,5 +29,6 @@ public class TestArchetypeBean extends ArchetypeTestBase{
 		HibernateUtil.closeSession();
 		
 	}
+	
 
 }
