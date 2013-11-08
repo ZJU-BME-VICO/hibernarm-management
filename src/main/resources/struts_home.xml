@@ -12,5 +12,16 @@
 		<action name="fileUpload" class="org.hibernarm.management.archetype.action.FileUploadAction">
 		     <result name="success">/WEB-INF/view/search.jsp</result>
 		</action>
+		<action name="displayAction" class="org.hibernarm.management.archetype.action.DisplayPairAction">
+		   <result name="success">/WEB-INF/view/displayPair.jsp</result>
+		</action>
+		<action name="download" class="org.hibernarm.management.archetype.action.FileDownLoad">
+		    <result name="success" type="stream">
+		        <param name="contentType">text/plain</param>
+		        <param name="inputName">inputStream</param>
+		        <param name="contentDisposition">attachment;filename="${keyName}.${fileType}"</param>
+		        <param name="bufferSize">4096</param>
+		    </result>
+		</action>
 	</package>
 </struts>

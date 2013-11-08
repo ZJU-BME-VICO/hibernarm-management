@@ -13,13 +13,13 @@ public class SearchArchetypeOnlyNameAction {
 	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
 
 	public String execute() {
-		String result = "SUCEESS";
+		String result = "success";
 		try {
 			archetypeBeanList = archetypeBeanDao
 					.matchProbableByNamePart(condition);
 			HibernateUtil.closeSession();
 		} catch (Exception e) {
-            result="FAIL";
+            result="fail";
 		} finally {
 			HibernateUtil.closeSession();
 		}

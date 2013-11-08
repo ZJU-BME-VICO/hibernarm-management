@@ -7,9 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <s:iterator value="archetypeBeanList">
-     <a href="#"> <s:property value="name"/> </a> <br/>
+  <s:iterator value="archetypeBeanList" id="singleBean">
+     <a href="/hibernarm-management/home/displayAction.action?keyName=<s:property value="name"/>"> <s:property value="name"/> </a> <br/>
   </s:iterator>
-
+ <s:debug/> 
 </body>
+
 </html>

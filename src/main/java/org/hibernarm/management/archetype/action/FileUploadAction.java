@@ -70,7 +70,7 @@ public class FileUploadAction extends ActionSupport {
 		List<ARMBean> list = new ArrayList<ARMBean>();
 		Date currentDate = new Date(System.currentTimeMillis());
 		for (int i = 0; i < uploadFileName.length; i++) {
-			if (uploadFileName[i].endsWith("xml")) {
+			if (uploadFileName[i].endsWith("arm")) {
 				ARMBean armBean = new ARMBean();
 				armBean.setContent(FileUtil.extractContent(upload[i]));
 				armBean.setModifyTime(currentDate);
