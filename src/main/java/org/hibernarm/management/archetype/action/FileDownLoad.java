@@ -2,6 +2,7 @@ package org.hibernarm.management.archetype.action;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import org.hibernarm.management.dao.impl.ARMBeanDaoHibernateImpl;
 import org.hibernarm.management.dao.impl.ArchetypeBeanDaoHibernateImpl;
@@ -30,15 +31,14 @@ public class FileDownLoad extends ActionSupport {
 	public void setKeyName(String keyName) {
 		this.keyName = keyName;
 	}
-	public InputStream getInputStream(){
+	public InputStream getInputStream() throws UnsupportedEncodingException{
 		InputStream input=null;
 		if("adl".equalsIgnoreCase(fileType)){
 			ArchetypeBean archetypeBean=archetypeBeanDao.selectByName(keyName);
-			input=new ByteArrayInputStream(archetypeBean.getContent().getBytes());			
+			input=new ByteArrayInputStream(archetypeBean.getContent().getBytes("UTF-8"));			
 		}else if("arm".equalsIgnoreCase(fileType)){
 			ARMBean armBean=armBeanDao.findByName(keyName);
-			input=new ByteArrayInputStream(armBean.getContent().getBytes());
-			
+			input=new ByteArrayInputStream(armBean.getContent().getBytes("UTF-8"));						
 		}
 		return input;
 	}
