@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>CDRSearch</title>
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="<%=request.getContextPath()%>/JS/jquery-2.0.3.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#addFile").click(function() {
