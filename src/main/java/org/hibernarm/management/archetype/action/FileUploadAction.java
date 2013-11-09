@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernarm.management.dao.impl.ARMBeanDaoHibernateImpl;
 import org.hibernarm.management.dao.impl.ArchetypeBeanDaoHibernateImpl;
 import org.hibernarm.management.dao.virtual.ARMBeanDao;
@@ -16,12 +17,15 @@ import org.hibernarm.management.util.HibernateUtil;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+
 public class FileUploadAction extends ActionSupport {
 	private File[] upload;
 	private String[] uploadFileName;
 	private String[] uploadContentType;
 	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
 	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
+	private static Logger logger=Logger.getLogger(FileUploadAction.class.getName());
+			
 
 	public File[] getUpload() {
 		return upload;
@@ -89,9 +93,11 @@ public class FileUploadAction extends ActionSupport {
 			List<ARMBean> listArmBeans = constructArmBeans(upload,
 					uploadFileName, uploadContentType);
 			for (ARMBean armBean : listArmBeans) {
+				logger.info("arm内容"+armBean.getContent());
 				armBeanDao.saveOrUpdate(armBean);
 			}
 			for (ArchetypeBean archetypeBean : listArchetypeBeans) {
+				logger.info("adl内容"+archetypeBean.getContent());
 				archetypeBeanDao.saveOrUpdate(archetypeBean);
 			}
 		} catch (Exception e) {
