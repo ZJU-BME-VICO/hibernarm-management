@@ -23,6 +23,7 @@
 				<database.url>jdbc:sqlserver://localhost:1433;DatabaseName=hibernarm-management</database.url>
 				<database.username>sa</database.username>
 				<database.password>sa</database.password>
+				<hibernarm.service.AQLExecute.url>http://localhost:9090/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -38,10 +39,11 @@
 			<id>test</id>
 			<properties>
 				<env>test</env>
-				<tomcat.url>http://172.17.0.71:9090/manager/text</tomcat.url>
-				<database.url>jdbc:sqlserver://172.17.0.71:1433;DatabaseName=hibernarm-management</database.url>
+				<tomcat.url>http://172.17.0.88:9090/manager/text</tomcat.url>
+				<database.url>jdbc:sqlserver://172.17.0.86:1433;DatabaseName=hibernarm-management</database.url>
 				<database.username>sa</database.username>
 				<database.password>Sql0808</database.password>
+				<hibernarm.service.AQLExecute.url>http://172.17.0.88:9090/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
 			</properties>
 		</profile>
 	</profiles>

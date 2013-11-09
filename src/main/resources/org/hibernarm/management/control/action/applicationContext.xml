@@ -19,7 +19,7 @@
            
     <bean id="wsclientFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">   
         <property name="serviceClass" value="org.hibernarm.service.AQLExecute" />   
-        <property name="address" value="http://localhost:9090/hibernarm-service/AQLExecute" />       
+        <property name="address" value="${hibernarm.service.AQLExecute.url}" />       
     </bean>
         
 </beans>
