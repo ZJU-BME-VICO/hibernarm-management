@@ -1,6 +1,7 @@
 package org.hibernarm.management.dao.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernarm.management.dao.virtual.ARMBeanDao;
 import org.hibernarm.management.model.ARMBean;
@@ -39,4 +40,10 @@ public class ARMBeanDaoHibernateImpl implements ARMBeanDao{
 		return armBean;
 	}
 
+	public List<ARMBean> selectAll() {
+		Session session = HibernateUtil.currentSession();
+		Query query = session.createQuery("from ARMBean");
+		List<ARMBean> arms = query.list();
+		return arms;
+	}
 }

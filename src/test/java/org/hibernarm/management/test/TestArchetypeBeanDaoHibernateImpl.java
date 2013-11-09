@@ -44,4 +44,12 @@ public class TestArchetypeBeanDaoHibernateImpl {
 		System.out.println(archetypeBean);
 	}
 
+	@Test
+	public void testSelectAll(){
+		ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
+		List<ArchetypeBean> archetypes = archetypeBeanDao.selectAll();
+		for (ArchetypeBean archetypeBean : archetypes) {
+			System.out.println(archetypeBean);			
+		}
+	}
 }

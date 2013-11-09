@@ -83,4 +83,12 @@ public class ArchetypeBeanDaoHibernateImpl implements ArchetypeBeanDao {
 		return archetypeBean;
 	}
 
+	public List<ArchetypeBean> selectAll() {
+		Session session = HibernateUtil.currentSession();
+		Query query = session
+				.createQuery("from ArchetypeBean");
+		List<ArchetypeBean> archetypes = query.list();
+		return archetypes;
+	}
+
 }

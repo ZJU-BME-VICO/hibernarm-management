@@ -23,7 +23,7 @@
 				<database.url>jdbc:sqlserver://localhost:1433;DatabaseName=hibernarm-management</database.url>
 				<database.username>sa</database.username>
 				<database.password>sa</database.password>
-				<hibernarm.service.AQLExecute.url>http://localhost:9090/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
+				<hibernarm.service.AQLExecute.url>http://localhost:9091/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -60,7 +60,7 @@
 					<path>/hibernarm-management</path>
 					<charset>utf-8</charset>
 					<uriEncoding>utf-8</uriEncoding>
-					<port>9091</port>
+					<port>9092</port>
 				</configuration>
 			</plugin>
 			<plugin>

@@ -26,6 +26,9 @@ public interface ArchetypeBeanDao {
 	 * if it is exist then update it,otherwise insert a new one
 	 */
 	void saveOrUpdate(ArchetypeBean bean);
+	
 	ArchetypeBean selectByName(String name);
+	
+	List<ArchetypeBean> selectAll();
 	
 }
