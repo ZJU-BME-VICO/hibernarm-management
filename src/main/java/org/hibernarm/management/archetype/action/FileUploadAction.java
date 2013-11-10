@@ -93,11 +93,11 @@ public class FileUploadAction extends ActionSupport {
 			List<ARMBean> listArmBeans = constructArmBeans(upload,
 					uploadFileName, uploadContentType);
 			for (ARMBean armBean : listArmBeans) {
-				logger.info("arm内容"+armBean.getContent());
+				logger.info("\narm\n"+armBean.getContent());
 				armBeanDao.saveOrUpdate(armBean);
 			}
 			for (ArchetypeBean archetypeBean : listArchetypeBeans) {
-				logger.info("adl内容"+archetypeBean.getContent());
+				logger.info("\narchetype\n"+archetypeBean.getContent());
 				archetypeBeanDao.saveOrUpdate(archetypeBean);
 			}
 		} catch (Exception e) {
