@@ -21,5 +21,12 @@
         <property name="serviceClass" value="org.hibernarm.service.AQLExecute" />   
         <property name="address" value="${hibernarm.service.AQLExecute.url}" />       
     </bean>
+    
+    <bean id="wsclientvalidation" class="org.hibernarm.service.AQLExecute" factory-bean="wsclientvalidationFactory" factory-method="create" />   
+           
+    <bean id="wsclientvalidationFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">   
+        <property name="serviceClass" value="org.hibernarm.service.AQLExecute" />   
+        <property name="address" value="${hibernarm.validation.AQLExecute.url}" />       
+    </bean>
         
 </beans>

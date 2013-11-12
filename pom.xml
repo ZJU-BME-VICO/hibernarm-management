@@ -16,6 +16,21 @@
 
 	<profiles>
 		<profile>
+			<id>debug</id>
+			<properties>
+				<env>debug</env>
+				<tomcat.url>http://localhost:9090/manager/text</tomcat.url>
+				<database.url>jdbc:sqlserver://localhost:1433;DatabaseName=hibernarm-management</database.url>
+				<database.username>sa</database.username>
+				<database.password>sa</database.password>
+				<hibernarm.service.AQLExecute.url>http://localhost:9091/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
+				<hibernarm.validation.AQLExecute.url>http://localhost:9093/hibernarm-validation/AQLExecute</hibernarm.validation.AQLExecute.url>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
 			<id>dev</id>
 			<properties>
 				<env>dev</env>
@@ -24,10 +39,8 @@
 				<database.username>sa</database.username>
 				<database.password>sa</database.password>
 				<hibernarm.service.AQLExecute.url>http://localhost:9090/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
+				<hibernarm.validation.AQLExecute.url>http://localhost:9090/hibernarm-validation/AQLExecute</hibernarm.validation.AQLExecute.url>
 			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 		</profile>
 		<profile>
 			<id>production</id>
@@ -44,6 +57,7 @@
 				<database.username>sa</database.username>
 				<database.password>Sql0808</database.password>
 				<hibernarm.service.AQLExecute.url>http://172.17.0.88:9090/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
+				<hibernarm.validation.AQLExecute.url>http://172.17.0.88:9090/hibernarm-validation/AQLExecute</hibernarm.validation.AQLExecute.url>
 			</properties>
 		</profile>
 	</profiles>
@@ -75,7 +89,7 @@
 							<sourceRoot>${basedir}/target/generated-sources</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<wsdl>http://localhost:9090/hibernarm-service/AQLExecute?wsdl</wsdl>
+									<wsdl>http://localhost:9091/hibernarm-service/AQLExecute?wsdl</wsdl>
 								</wsdlOption>
 							</wsdlOptions>
 						</configuration>
