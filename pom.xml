@@ -12,14 +12,15 @@
 		<springframework.version>3.2.2.RELEASE</springframework.version>
 		<hibernate.version>4.2.7.Final</hibernate.version>
 		<cxf.version>2.7.6</cxf.version>
+		<tomcat.port>9092</tomcat.port>
 	</properties>
 
 	<profiles>
 		<profile>
-			<id>debug</id>
+			<id>dev</id>
 			<properties>
-				<env>debug</env>
-				<tomcat.url>http://localhost:9090/manager/text</tomcat.url>
+				<env>dev</env>
+				<tomcat.url>http://localhost:${tomcat.port}/manager/text</tomcat.url>
 				<database.url>jdbc:sqlserver://localhost:1433;DatabaseName=hibernarm-management</database.url>
 				<database.username>sa</database.username>
 				<database.password>sa</database.password>
@@ -31,18 +32,6 @@
 			</activation>
 		</profile>
 		<profile>
-			<id>dev</id>
-			<properties>
-				<env>dev</env>
-				<tomcat.url>http://localhost:9090/manager/text</tomcat.url>
-				<database.url>jdbc:sqlserver://localhost:1433;DatabaseName=hibernarm-management</database.url>
-				<database.username>sa</database.username>
-				<database.password>sa</database.password>
-				<hibernarm.service.AQLExecute.url>http://localhost:9090/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
-				<hibernarm.validation.AQLExecute.url>http://localhost:9090/hibernarm-validation/AQLExecute</hibernarm.validation.AQLExecute.url>
-			</properties>
-		</profile>
-		<profile>
 			<id>production</id>
 			<properties>
 				<env>production</env>
@@ -52,12 +41,12 @@
 			<id>test</id>
 			<properties>
 				<env>test</env>
-				<tomcat.url>http://172.17.0.88:9090/manager/text</tomcat.url>
+				<tomcat.url>http://172.17.0.88:${tomcat.port}/manager/text</tomcat.url>
 				<database.url>jdbc:sqlserver://172.17.0.86:1433;DatabaseName=hibernarm-management</database.url>
 				<database.username>sa</database.username>
 				<database.password>Sql0808</database.password>
-				<hibernarm.service.AQLExecute.url>http://172.17.0.88:9090/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
-				<hibernarm.validation.AQLExecute.url>http://172.17.0.88:9090/hibernarm-validation/AQLExecute</hibernarm.validation.AQLExecute.url>
+				<hibernarm.service.AQLExecute.url>http://172.17.0.88:9091/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
+				<hibernarm.validation.AQLExecute.url>http://172.17.0.88:9093/hibernarm-validation/AQLExecute</hibernarm.validation.AQLExecute.url>
 			</properties>
 		</profile>
 	</profiles>
@@ -74,7 +63,7 @@
 					<path>/hibernarm-management</path>
 					<charset>utf-8</charset>
 					<uriEncoding>utf-8</uriEncoding>
-					<port>9092</port>
+					<port>${tomcat.port}</port>
 				</configuration>
 			</plugin>
 			<plugin>
