@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernarm.management.control.action.HibernarmControl;
+import org.hibernarm.management.control.action.HibernarmControlAction;
 import org.hibernarm.management.dao.impl.ARMBeanDaoHibernateImpl;
 import org.hibernarm.management.dao.impl.ArchetypeBeanDaoHibernateImpl;
 import org.hibernarm.management.dao.virtual.ARMBeanDao;
@@ -14,6 +16,9 @@ import org.hibernarm.management.model.ARMBean;
 import org.hibernarm.management.model.ArchetypeBean;
 import org.hibernarm.management.util.FileUtil;
 import org.hibernarm.management.util.HibernateUtil;
+import org.hibernarm.service.AQLExecute;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -94,19 +99,28 @@ public class FileUploadAction extends ActionSupport {
 					uploadFileName, uploadContentType, modifyTime);
 
 			for (ARMBean armBean : listArmBeans) {
-				logger.info("arm内容" + armBean.getContent());
 				armBeanDao.saveOrUpdate(armBean);
 			}
 			for (ArchetypeBean archetypeBean : listArchetypeBeans) {
-				logger.info("adl内容" + archetypeBean.getContent());
 				archetypeBeanDao.saveOrUpdate(archetypeBean);
 			}
+			
+			validateHibernarm();
 		} catch (Exception e) {
 			result = "fail";
 		} finally {
 			HibernateUtil.closeSession();
 		}
 		return result;
+	}
+	
+	protected void validateHibernarm() {
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"applicationContext.xml", HibernarmControlAction.class);
+		AQLExecute client = (AQLExecute) context.getBean("wsclientvalidation");
+		
+		HibernarmControl control = new HibernarmControl();
+		control.execute(client);
 	}
 
 	private void saveAction(List<ARMBean>listArmBeans,List<ArchetypeBean>listArchetypeBeans) {
