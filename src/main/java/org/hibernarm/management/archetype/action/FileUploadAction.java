@@ -17,15 +17,14 @@ import org.hibernarm.management.util.HibernateUtil;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-
 public class FileUploadAction extends ActionSupport {
 	private File[] upload;
 	private String[] uploadFileName;
 	private String[] uploadContentType;
 	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
 	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
-	private static Logger logger=Logger.getLogger(FileUploadAction.class.getName());
-			
+	private static Logger logger = Logger.getLogger(FileUploadAction.class
+			.getName());
 
 	public File[] getUpload() {
 		return upload;
@@ -52,16 +51,16 @@ public class FileUploadAction extends ActionSupport {
 	}
 
 	private static List<ArchetypeBean> constructArchetypeBeans(File[] upload,
-			String[] uploadFileName, String[] uploadContentType)
+			String[] uploadFileName, String[] uploadContentType, Date modifyTime)
 			throws Exception {
 		List<ArchetypeBean> list = new ArrayList<ArchetypeBean>();
-		Date currentDate = new Date(System.currentTimeMillis());
 		for (int i = 0; i < upload.length; i++) {
 			if (uploadFileName[i].endsWith("adl")) {
 				ArchetypeBean archetypeBean = new ArchetypeBean();
-				archetypeBean.setModifyTime(currentDate);
+				archetypeBean.setModifyTime(modifyTime);
 				archetypeBean.setContent(FileUtil.extractContent(upload[i]));
-				archetypeBean.setName(uploadFileName[i].substring(0, uploadFileName[i].lastIndexOf(".")));
+				archetypeBean.setName(uploadFileName[i].substring(0,
+						uploadFileName[i].lastIndexOf(".")));
 				list.add(archetypeBean);
 			}
 		}
@@ -69,16 +68,16 @@ public class FileUploadAction extends ActionSupport {
 	}
 
 	private static List<ARMBean> constructArmBeans(File[] upload,
-			String[] uploadFileName, String[] uploadContentType)
+			String[] uploadFileName, String[] uploadContentType, Date modifyTime)
 			throws Exception {
 		List<ARMBean> list = new ArrayList<ARMBean>();
-		Date currentDate = new Date(System.currentTimeMillis());
 		for (int i = 0; i < uploadFileName.length; i++) {
 			if (uploadFileName[i].endsWith("arm")) {
 				ARMBean armBean = new ARMBean();
 				armBean.setContent(FileUtil.extractContent(upload[i]));
-				armBean.setModifyTime(currentDate);
-				armBean.setName(uploadFileName[i].substring(0, uploadFileName[i].lastIndexOf(".")));
+				armBean.setModifyTime(modifyTime);
+				armBean.setName(uploadFileName[i].substring(0,
+						uploadFileName[i].lastIndexOf(".")));
 				list.add(armBean);
 			}
 		}
@@ -87,17 +86,19 @@ public class FileUploadAction extends ActionSupport {
 
 	public String execute() {
 		String result = "success";
+		Date modifyTime = new Date(System.currentTimeMillis());
 		try {
 			List<ArchetypeBean> listArchetypeBeans = constructArchetypeBeans(
-					upload, uploadFileName, uploadContentType);
+					upload, uploadFileName, uploadContentType, modifyTime);
 			List<ARMBean> listArmBeans = constructArmBeans(upload,
-					uploadFileName, uploadContentType);
+					uploadFileName, uploadContentType, modifyTime);
+
 			for (ARMBean armBean : listArmBeans) {
-				logger.info("arm内容"+armBean.getContent());
+				logger.info("arm内容" + armBean.getContent());
 				armBeanDao.saveOrUpdate(armBean);
 			}
 			for (ArchetypeBean archetypeBean : listArchetypeBeans) {
-				logger.info("adl内容"+archetypeBean.getContent());
+				logger.info("adl内容" + archetypeBean.getContent());
 				archetypeBeanDao.saveOrUpdate(archetypeBean);
 			}
 		} catch (Exception e) {
@@ -107,5 +108,16 @@ public class FileUploadAction extends ActionSupport {
 		}
 		return result;
 	}
+
+	private void saveAction(List<ARMBean>listArmBeans,List<ArchetypeBean>listArchetypeBeans) {
+ 		
+		for (ARMBean armBean : listArmBeans) {
+			armBeanDao.saveOrUpdate(armBean);
+		}
+		for (ArchetypeBean archetypeBean : listArchetypeBeans) {
+			archetypeBeanDao.saveOrUpdate(archetypeBean);
+		}
+	}
+
 
 }

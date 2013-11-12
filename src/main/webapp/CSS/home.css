@@ -1,0 +1,21 @@
+#searchDiv {
+	margin-top: -100px;
+	margin-left: -200px;
+	left: 50%;
+	top: 50%;
+	position: absolute;
+	margin-top: -100px;
+}
+
+#uploadDiv {
+	postion: relativ;
+	top: 500px;
+	left: 300px;
+	position: absolute;
+}
+
+.testWHH { .
+	width: 320px;
+	height: 22px;
+	margin: 0;
+}

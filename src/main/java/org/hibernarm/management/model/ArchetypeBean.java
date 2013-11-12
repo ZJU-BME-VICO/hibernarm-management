@@ -17,6 +17,8 @@ public class ArchetypeBean implements Serializable{
 	private String content;
 	private Date modifyTime;
     private String description;
+    private Integer commitSequence;
+    
     public ArchetypeBean(){
     	
     }
@@ -65,7 +67,13 @@ public class ArchetypeBean implements Serializable{
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-
+	public Integer getCommitSequence() {
+		return commitSequence;
+	}
+	public void setCommitSequence(Integer commitSequence) {
+		this.commitSequence = commitSequence;
+	}
+    
 	
 
 }

@@ -3,25 +3,39 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<package name="home" extends="struts-default" namespace="/home">
-		<action name="homeSearch" class="org.hibernarm.management.archetype.action.HomeAction">
+		<action name="homeSearch"
+			class="org.hibernarm.management.archetype.action.HomeAction">
 			<result name="success">/WEB-INF/view/search.jsp</result>
 		</action>
-		<action name="archetypeNameSearch" class="org.hibernarm.management.archetype.action.SearchArchetypeOnlyNameAction">
+		<action name="archetypeNameSearch"
+			class="org.hibernarm.management.archetype.action.SearchArchetypeOnlyNameAction">
 			<result name="success">/WEB-INF/view/archetypeResult.jsp</result>
 		</action>
-		<action name="fileUpload" class="org.hibernarm.management.archetype.action.FileUploadAction">
-		     <result name="success">/WEB-INF/view/search.jsp</result>
+		<action name="fileUpload"
+			class="org.hibernarm.management.archetype.action.FileUploadAction">
+			<result name="success">/WEB-INF/view/search.jsp</result>
 		</action>
-		<action name="displayAction" class="org.hibernarm.management.archetype.action.DisplayPairAction">
-		   <result name="success">/WEB-INF/view/displayPair.jsp</result>
+		<action name="displayAction"
+			class="org.hibernarm.management.archetype.action.DisplayPairAction">
+			<result name="success">/WEB-INF/view/displayPair.jsp</result>
 		</action>
-		<action name="download" class="org.hibernarm.management.archetype.action.FileDownLoad">
-		    <result name="success" type="stream">
-		        <param name="contentType">text/plain </param>
-		        <param name="inputName">inputStream</param>
-		        <param name="contentDisposition">attachment;filename="${keyName}.${fileType}"</param>
-		        <param name="bufferSize">4096</param>
-		    </result>
+		<action name="download"
+			class="org.hibernarm.management.archetype.action.FileDownLoad">
+			<result name="success" type="stream">
+				<param name="contentType">text/plain </param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="${keyName}.${fileType}"</param>
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+	</package>
+	<package name="json" extends="json-default" namespace="/asyn">
+		<action name="examExist"
+			class="org.hibernarm.management.archetype.action.ExamExistAction">
+			<result  type="json">
+			   <param name="root">flagExisted</param>
+			</result>
 		</action>
 	</package>
 </struts>

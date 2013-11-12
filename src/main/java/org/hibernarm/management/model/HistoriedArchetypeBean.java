@@ -4,17 +4,33 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-@Entity
-public class ARMBean implements Serializable{
+
+public class HistoriedArchetypeBean implements Serializable{
 	private Integer id;
 	private String name;
 	private String content;
-	private Date modifyTime;
-	private int commitSequence;
+	private Date historiedTime;
+    private String description;
+    private Integer commitSequence;
+    
+    public HistoriedArchetypeBean(){
+    	
+    }
+    public HistoriedArchetypeBean(String name,String description){
+    	this.name=name;
+    	this.description=description;
+    }
+    @Lob
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -41,20 +57,20 @@ public class ARMBean implements Serializable{
 		this.content = content;
 	}
 	
-	public Date getModifyTime() {
-		return modifyTime;
-	}
 
-	public void setModifyTime(Date modifyTime) {
-		this.modifyTime = modifyTime;
+	public Date getHistoriedTime() {
+		return historiedTime;
 	}
-
-	public int getCommitSequence() {
+	public void setHistoriedTime(Date historiedTime) {
+		this.historiedTime = historiedTime;
+	}
+	public Integer getCommitSequence() {
 		return commitSequence;
 	}
-
-	public void setCommitSequence(int commitSequence) {
+	public void setCommitSequence(Integer commitSequence) {
 		this.commitSequence = commitSequence;
 	}
     
+	
+
 }

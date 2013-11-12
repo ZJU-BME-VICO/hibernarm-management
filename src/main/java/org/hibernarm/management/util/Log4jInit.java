@@ -14,9 +14,9 @@ public class Log4jInit extends HttpServlet{
 	}
 	public void init(ServletConfig config){
 		String prefix=config.getServletContext().getRealPath("/");
+		System.out.println(prefix);
 		String file=config.getInitParameter("log4j");
 		String filePath=prefix+file;
-		System.out.println(prefix);
 		Properties props=new Properties();
 	    try{
 	    	FileInputStream iStream=new FileInputStream(filePath);

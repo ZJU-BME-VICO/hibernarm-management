@@ -1,19 +1,17 @@
 package org.hibernarm.management.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-@Entity
-public class ARMBean implements Serializable{
+
+public class HistoriedARMBean {
 	private Integer id;
 	private String name;
 	private String content;
-	private Date modifyTime;
+	private Date historiedTime;
 	private int commitSequence;
 	@Id
 	@GeneratedValue
@@ -40,13 +38,13 @@ public class ARMBean implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
-	public Date getModifyTime() {
-		return modifyTime;
+
+	public Date getHistoriedTime() {
+		return historiedTime;
 	}
 
-	public void setModifyTime(Date modifyTime) {
-		this.modifyTime = modifyTime;
+	public void setHistoriedTime(Date historiedTime) {
+		this.historiedTime = historiedTime;
 	}
 
 	public int getCommitSequence() {
@@ -56,5 +54,4 @@ public class ARMBean implements Serializable{
 	public void setCommitSequence(int commitSequence) {
 		this.commitSequence = commitSequence;
 	}
-    
 }
