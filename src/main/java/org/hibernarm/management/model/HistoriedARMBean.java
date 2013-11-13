@@ -12,7 +12,7 @@ public class HistoriedARMBean {
 	private String name;
 	private String content;
 	private Date historiedTime;
-	private int commitSequence;
+	private Integer commitSequence;
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -47,11 +47,11 @@ public class HistoriedARMBean {
 		this.historiedTime = historiedTime;
 	}
 
-	public int getCommitSequence() {
+	public Integer getCommitSequence() {
 		return commitSequence;
 	}
 
-	public void setCommitSequence(int commitSequence) {
+	public void setCommitSequence(Integer commitSequence) {
 		this.commitSequence = commitSequence;
 	}
 }

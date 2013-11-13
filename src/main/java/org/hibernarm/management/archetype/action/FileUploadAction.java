@@ -26,6 +26,7 @@ public class FileUploadAction extends ActionSupport {
 	private File[] upload;
 	private String[] uploadFileName;
 	private String[] uploadContentType;
+	private String overrideFile;
 	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
 	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
 	private static Logger logger = Logger.getLogger(FileUploadAction.class
@@ -105,7 +106,7 @@ public class FileUploadAction extends ActionSupport {
 				archetypeBeanDao.saveOrUpdate(archetypeBean);
 			}
 			
-			validateHibernarm();
+			//validateHibernarm();
 		} catch (Exception e) {
 			result = "fail";
 		} finally {

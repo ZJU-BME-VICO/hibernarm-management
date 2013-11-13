@@ -14,7 +14,7 @@ public class ARMBean implements Serializable{
 	private String name;
 	private String content;
 	private Date modifyTime;
-	private int commitSequence;
+	private Integer commitSequence;
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -49,11 +49,11 @@ public class ARMBean implements Serializable{
 		this.modifyTime = modifyTime;
 	}
 
-	public int getCommitSequence() {
+	public Integer getCommitSequence() {
 		return commitSequence;
 	}
 
-	public void setCommitSequence(int commitSequence) {
+	public void setCommitSequence(Integer commitSequence) {
 		this.commitSequence = commitSequence;
 	}
     

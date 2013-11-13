@@ -8,14 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 @Entity
 public class CommitSequence implements Serializable{
-	private int id;
+	private Integer id;
 	private Date commitTime;
 	@Id
 	@GeneratedValue
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Date getCommitTime() {
