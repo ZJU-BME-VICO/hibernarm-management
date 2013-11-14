@@ -13,6 +13,7 @@
 		<hibernate.version>4.2.7.Final</hibernate.version>
 		<cxf.version>2.7.6</cxf.version>
 		<tomcat.port>9092</tomcat.port>
+		<openEHR.version>1.0.5-SNAPSHOT</openEHR.version>
 	</properties>
 
 	<profiles>
@@ -157,6 +158,11 @@
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-json-plugin</artifactId>
 			<version>2.3.15.3</version>
+		</dependency>
+		<dependency>
+			<groupId>openehr</groupId>
+			<artifactId>adl-parser</artifactId>
+			<version>${openEHR.version}</version>
 		</dependency>
 	</dependencies>
 </project>
