@@ -28,16 +28,16 @@
 	<div id="uploadDiv">
 		<input type="button" value="add file" id="addFile" />
 		
-		<form onsubmit="return checkUploadForm();"
+		<form onsubmit="return false;"
 			action="/hibernarm-management/home/fileUpload.action" method="post"
-			enctype="multipart/form-data">
+			enctype="multipart/form-data" id="uploadDomain">
 			<span id="files"> <input type='file' name='upload'
 				class="selectionExist" /><span></span><span></span><br /> <input type='file'
 				name='upload' class="selectionExist" /><span></span><span></span><br />
 			</span>
-			 已存在文件是否覆盖：<input type="radio" name="overrideFile" value="Y"/>Y
+			When file existed,override it?<input type="radio" name="overrideFile" value="Y"/>Y
 			 <input type="radio" name="overrideFile" value="N" checked="checked">N<br/>
-			<input type="submit" value="上传" />
+			<input type="button" value="upload" id="uploadButton"/>
 		</form>
 		<span id="uploadTip"></span>
 	</div>

@@ -22,13 +22,12 @@ import org.hibernarm.management.util.HibernateUtil;
 import org.hibernarm.service.AQLExecute;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import com.opensymphony.xwork2.ActionSupport;
 
-public class FileUploadAction extends ActionSupport {
+public class FileUploadAction {
 	private File[] upload;
 	private String[] uploadFileName;
 	private String[] uploadContentType;
-	private String overrideFile;
+	private String uploadResult;
 	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
 	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
 	private static Logger logger = Logger.getLogger(FileUploadAction.class
@@ -56,6 +55,15 @@ public class FileUploadAction extends ActionSupport {
 
 	public void setUploadContentType(String[] uploadContentType) {
 		this.uploadContentType = uploadContentType;
+	}
+	
+
+	public String getUploadResult() {
+		return uploadResult;
+	}
+
+	public void setUploadResult(String uploadResult) {
+		this.uploadResult = uploadResult;
 	}
 
 	private static List<ArchetypeBean> constructArchetypeBeans(File[] upload,
@@ -101,7 +109,7 @@ public class FileUploadAction extends ActionSupport {
 	}
 
 	public String execute() {
-		String result = "success";
+		uploadResult="success";
 		Date modifyTime = new Date(System.currentTimeMillis());
 		CommitSequence commitSequence=new CommitSequence();
 		try {
@@ -118,12 +126,13 @@ public class FileUploadAction extends ActionSupport {
 			}
 
 			// validateHibernarm();
-		} catch (Exception e) {
-			result = "fail";
+		} catch (Throwable e) {
+			uploadResult="fail";
+			logger.error("upload file fail"+e.getMessage());
 		} finally {
 			HibernateUtil.closeSession();
 		}
-		return result;
+		return "success";
 	}
 
 	protected void validateHibernarm() {
@@ -145,5 +154,6 @@ public class FileUploadAction extends ActionSupport {
 			archetypeBeanDao.saveOrUpdate(archetypeBean);
 		}
 	}
+	
 
 }
