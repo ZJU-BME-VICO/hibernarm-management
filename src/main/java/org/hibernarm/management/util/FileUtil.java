@@ -75,7 +75,8 @@ public class FileUtil {
 		FILE_TYPE_MAP.put("AC9EBD8F", "qdf");
 		FILE_TYPE_MAP.put("E3828596", "pwl");
 		FILE_TYPE_MAP.put("2E7261FD", "ram");
-		FILE_TYPE_MAP.put("61726368657479706520", "adl");
+		FILE_TYPE_MAP.put("61726368657479706520", "adl"); // UTF-8
+		FILE_TYPE_MAP.put("efbbbf61726368657479", "adl"); // UTF-8 BOM
 	}
 
 	private static String bytesToHexString(byte[] src) {
