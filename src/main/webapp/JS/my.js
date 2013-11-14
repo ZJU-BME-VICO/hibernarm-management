@@ -34,7 +34,7 @@ function checkUploadForm(){
 }
 $(document).ready(function() {
 		$("#addFile").click(function() {
-             $("#files").append("<input type='file'  name='upload' class='selectionExist'/><span></span><span style='display:none'></span><br/>");
+             $("#files").append("<input type='file'  name='upload' class='selectionExist'/><span></span><span></span><br/>");
 		});
 		$("#files").on('change','input.selectionExist',function(){
 			$(this).next().text("");
@@ -49,10 +49,9 @@ $(document).ready(function() {
 					processData: false,  // tell jQuery not to process the data
 					contentType: false,  // tell jQuery not to set contentType
 				    success:function(data,textStatus,jqXHR){
-				    	if(data=="EXISTED"){
-				    		$(chooseFile).next().text("existed");
-				    	}
-				    	
+				    	var objFileExist = eval('(' + data + ')'); 
+				    	$(chooseFile).next().text(objFileExist.status);
+				    	$(chooseFile).next().next().text(objFileExist.name);
 				    }
 				});
 			}

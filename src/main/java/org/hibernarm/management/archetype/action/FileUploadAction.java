@@ -63,7 +63,7 @@ public class FileUploadAction extends ActionSupport {
 			throws Exception {
 		List<ArchetypeBean> list = new ArrayList<ArchetypeBean>();
 		for (int i = 0; i < upload.length; i++) {
-			if (FileUtil.getFileType(upload[i]).compareToIgnoreCase("xml") != 0) {
+			if (FileUtil.getFileType(upload[i]).compareToIgnoreCase("adl") == 0) {
 				ArchetypeUtil archetypeUtil = new ArchetypeUtil(upload[i]);
 				String archetypeId = archetypeUtil.getArchetypeId();
 				String archetypeContent = archetypeUtil.getArchetypeContent();

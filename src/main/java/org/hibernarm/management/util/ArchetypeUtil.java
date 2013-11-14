@@ -20,7 +20,7 @@ public class ArchetypeUtil {
 			archetypeId = archetypeIdNode.toString();	
 			ADLSerializer adlSerilizer = new ADLSerializer();
 			archetypeContent = adlSerilizer.output(archetype);
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			archetype = null;
 			archetypeId = "";
 			archetypeContent = "";

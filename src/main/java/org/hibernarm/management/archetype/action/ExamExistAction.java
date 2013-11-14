@@ -8,8 +8,12 @@ import org.hibernarm.management.dao.virtual.ARMBeanDao;
 import org.hibernarm.management.dao.virtual.ArchetypeBeanDao;
 import org.hibernarm.management.model.ARMBean;
 import org.hibernarm.management.model.ArchetypeBean;
-import org.hibernarm.management.util.HibernateUtil;
-import org.hibernarm.management.util.UtilConstant;
+import org.hibernarm.management.util.ARMUtil;
+import org.hibernarm.management.util.ArchetypeUtil;
+import org.hibernarm.management.util.FileUtil;
+import org.hibernarm.management.util.FileExistConstant;
+
+import com.google.gson.Gson;
 
 public class ExamExistAction {
 	private String examName;
@@ -18,28 +22,62 @@ public class ExamExistAction {
 	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
 	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
 
+	private class FileExist {
+		private String status = "";
+		private String name = "";
+	}
+
 	public String execute() {
 		String result = "success";
-		ARMBean armBean = null;
-		ArchetypeBean archetypeBean = null;
-		flagExisted = UtilConstant.EXISTED;
-//		String prefix = examName.substring(0, examName.lastIndexOf("."));
-//		String suf = examName.substring(examName.lastIndexOf(".") + 1);
-//		flagExisted = UtilConstant.NONE;
-//		try {
-//			if ("arm".equalsIgnoreCase(suf)) {
-//				armBean = armBeanDao.findByName(prefix);
-//			} else if ("adl".equalsIgnoreCase(suf)) {
-//				archetypeBean = archetypeBeanDao.selectByName(prefix);
-//			}
-//			if (archetypeBean != null || armBean != null) {
-//				flagExisted = UtilConstant.EXISTED;
-//			}
-//		} catch (Exception e) {
-//			result = "fail";
-//		} finally {
-//			HibernateUtil.closeSession();
-//		}
+
+		FileExist fe = new FileExist();
+
+		if (FileUtil.getFileType(singleFile[0]).compareToIgnoreCase("adl") == 0) {
+			ArchetypeUtil archetypeUtil = new ArchetypeUtil(singleFile[0]);
+			String archetypeId = archetypeUtil.getArchetypeId();
+			String archetypeContent = archetypeUtil.getArchetypeContent();
+			fe.name = archetypeId;
+			if (!archetypeId.isEmpty() && !archetypeContent.isEmpty()) {
+				ArchetypeBean archetypeBean = archetypeBeanDao
+						.selectByName(archetypeId);
+				if (archetypeBean != null) {
+					if (archetypeBean.getContent().compareTo(archetypeContent) == 0) {
+						fe.status = FileExistConstant.EXISTED;
+					} else {
+						fe.status = FileExistConstant.CHANGED;
+					}
+				} else {
+					fe.status = FileExistConstant.NONE;
+				}
+			} else {
+				fe.status = FileExistConstant.INVALID;
+			}
+		}
+
+		if (FileUtil.getFileType(singleFile[0]).compareToIgnoreCase("xml") == 0) {
+			ARMUtil armUtil = new ARMUtil(singleFile[0]);
+			String archetypeId = armUtil.getArchetypeId();
+			String armContent = armUtil.getARMContent();
+			fe.name = archetypeId;
+			if (!archetypeId.isEmpty() && !armContent.isEmpty()) {
+				ARMBean armBean = armBeanDao.findByName(archetypeId);
+				if (armBean != null) {
+					if (armBean.getContent().compareTo(armContent) == 0) {
+						fe.status = FileExistConstant.EXISTED;
+					} else {
+						fe.status = FileExistConstant.CHANGED;
+					}
+				} else {
+					fe.status = FileExistConstant.NONE;
+				}
+			} else {
+				fe.status = FileExistConstant.INVALID;
+			}
+		}
+
+		Gson g = new Gson();
+		flagExisted = g.toJson(fe);
+
 		return result;
 	}
 
@@ -82,5 +120,5 @@ public class ExamExistAction {
 	public void setSingleFile(File[] singleFile) {
 		this.singleFile = singleFile;
 	}
-   
+
 }
