@@ -22,7 +22,7 @@
 			<input type="text" name="condition"
 				style="width: 500px; height: 30px; font-size: 150%; vertical-align: middle;"></input> <input
 				style="vertical-align: middle;" type="image"
-				src="<%=request.getContextPath()%>/image/search.gif" alt="Submit">
+				src="image/search.gif" alt="Submit">
 		</form>
 	</div>
 	<div id="uploadDiv">
