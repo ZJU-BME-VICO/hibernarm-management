@@ -1,16 +1,25 @@
 #searchDiv {
-	margin-top: -100px;
-	margin-left: -200px;
-	left: 50%;
-	top: 50%;
-	position: absolute;
-	margin-top: -100px;
+	margin-top: 200px;
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#searchInput {
+	width: 724px;
+	vertical-align: middle;
+	font-size: 150%;
+}
+
+#searchSubmit {
+	vertical-align: middle;
+	height: 34px;
+	width: 68px;
 }
 
 #uploadDiv {
-	postion: relativ;
-	top: 500px;
-	left: 300px;
-	position: absolute;
+	margin-top: 50px;
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
 }
-
