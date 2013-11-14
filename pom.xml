@@ -164,5 +164,10 @@
 			<artifactId>adl-parser</artifactId>
 			<version>${openEHR.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>openehr</groupId>
+			<artifactId>adl-serializer</artifactId>
+			<version>${openEHR.version}</version>
+		</dependency>
 	</dependencies>
 </project>

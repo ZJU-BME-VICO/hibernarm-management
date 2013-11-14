@@ -24,12 +24,14 @@ import org.hibernarm.management.util.FileUtil;
 import org.hibernarm.management.util.HibernateUtil;
 import org.hibernarm.service.AQLExecute;
 import org.openehr.am.archetype.Archetype;
+import org.openehr.am.serialize.ADLSerializer;
 import org.openehr.rm.support.identification.ArchetypeID;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+
 import se.acode.openehr.parser.ADLParser;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -74,16 +76,18 @@ public class FileUploadAction extends ActionSupport {
 		List<ArchetypeBean> list = new ArrayList<ArchetypeBean>();
 		for (int i = 0; i < upload.length; i++) {
 			if (FileUtil.getFileType(upload[i]).compareToIgnoreCase("xml") != 0) {
-				String content = FileUtil.extractContent(upload[i]);
-				ADLParser parser = new ADLParser(content);
+				ADLParser parser = new ADLParser(upload[i]);
 				Archetype archetype = null;
 				try {
 					archetype = parser.parse();
 				} catch (Exception e) {
 				}
+				
+				ADLSerializer adlSerilizer = new ADLSerializer();
+				String content = adlSerilizer.output(archetype);
 
 				ArchetypeID archetypeId = archetype.getArchetypeId();
-				if (!archetypeId.toString().isEmpty()) {
+				if (!archetypeId.toString().isEmpty() && !content.isEmpty()) {
 					ArchetypeBean archetypeBean = new ArchetypeBean();
 					archetypeBean.setModifyTime(modifyTime);
 					archetypeBean.setContent(content);
