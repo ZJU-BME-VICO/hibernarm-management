@@ -20,6 +20,7 @@ import org.hibernarm.management.dao.virtual.ARMBeanDao;
 import org.hibernarm.management.dao.virtual.ArchetypeBeanDao;
 import org.hibernarm.management.model.ARMBean;
 import org.hibernarm.management.model.ArchetypeBean;
+import org.hibernarm.management.model.CommitSequence;
 import org.hibernarm.management.util.FileUtil;
 import org.hibernarm.management.util.HibernateUtil;
 import org.hibernarm.service.AQLExecute;
@@ -131,6 +132,7 @@ public class FileUploadAction extends ActionSupport {
 	public String execute() {
 		String result = "success";
 		Date modifyTime = new Date(System.currentTimeMillis());
+		CommitSequence commitSequence=new CommitSequence();
 		try {
 			List<ArchetypeBean> listArchetypeBeans = constructArchetypeBeans(
 					upload, uploadFileName, uploadContentType, modifyTime);

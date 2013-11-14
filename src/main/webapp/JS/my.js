@@ -50,7 +50,7 @@ $(document).ready(function() {
 					contentType: false,  // tell jQuery not to set contentType
 				    success:function(data,textStatus,jqXHR){
 				    	if(data=="EXISTED"){
-				    		$(chooseFile).next().text("\""+fileName+"\" existed");
+				    		$(chooseFile).next().text("existed");
 				    	}
 				    	
 				    }
