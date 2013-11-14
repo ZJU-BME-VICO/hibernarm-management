@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib uri="/struts-tags" prefix="s"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
 <html>
 <head>
 <style type="text/css">
@@ -9,7 +10,7 @@ textarea {
 	width: 100%;
 }
 </style>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -22,7 +23,7 @@ textarea {
 </textarea>
 <s:if test="archetypeBean!=null">
 	<a
-		href="/hibernarm-management/home/download.action?keyName=<s:property value="archetypeBean.name"/>&fileType=adl">download</a>
+		href="/hibernarm-management/download.action?keyName=<s:property value="archetypeBean.name"/>&fileType=adl">download</a>
 </s:if>
 	<br />
 	<br /> ARMBean
@@ -34,7 +35,7 @@ textarea {
 </textarea>
 <s:if test="armBean!=null">
 	<a
-		href="/hibernarm-management/home/download.action?keyName=<s:property value="armBean.name"/>&fileType=arm">download</a>
+		href="/hibernarm-management/download.action?keyName=<s:property value="armBean.name"/>&fileType=arm">download</a>
 </s:if>
 </body>
 </html>

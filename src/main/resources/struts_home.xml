@@ -2,18 +2,18 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	<package name="home" extends="struts-default" namespace="/home">
+	<package name="home" extends="struts-default" namespace="/">
 		<action name="homeSearch"
 			class="org.hibernarm.management.archetype.action.HomeAction">
-			<result name="success">/WEB-INF/view/search.jsp</result>
+			<result name="success">search.jsp</result>
 		</action>
 		<action name="archetypeNameSearch"
 			class="org.hibernarm.management.archetype.action.SearchArchetypeOnlyNameAction">
-			<result name="success">/WEB-INF/view/archetypeResult.jsp</result>
+			<result name="success">archetypeResult.jsp</result>
 		</action>
 		<action name="displayAction"
 			class="org.hibernarm.management.archetype.action.DisplayPairAction">
-			<result name="success">/WEB-INF/view/displayPair.jsp</result>
+			<result name="success">displayPair.jsp</result>
 		</action>
 		<action name="download"
 			class="org.hibernarm.management.archetype.action.FileDownLoad">
@@ -26,7 +26,7 @@
 		</action>
 
 	</package>
-	<package name="json" extends="json-default" namespace="/asyn">
+	<package name="json" extends="json-default" namespace="/">
 		<action name="examExist"
 			class="org.hibernarm.management.archetype.action.ExamExistAction">
 			<result type="json">

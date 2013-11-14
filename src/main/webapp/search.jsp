@@ -7,10 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>CDRSearch</title>
 <link rel=stylesheet type="text/css"
-	href="<%=request.getContextPath()%>/CSS/home.css">
-<script src="<%=request.getContextPath()%>/JS/jquery-2.0.3.js"></script>
+	href="CSS/home.css">
+<script src="JS/jquery-2.0.3.js"></script>
 <script type="text/javascript"
-	src="<%=request.getContextPath()%>/JS/my.js"></script>
+	src="JS/my.js"></script>
 <style>
 </style>
 </head>
@@ -18,7 +18,7 @@
 
 	<div id="searchDiv">
 		<form method="post"
-			action="/hibernarm-management/home/archetypeNameSearch.action">
+			action="/hibernarm-management/archetypeNameSearch.action">
 			<input type="text" name="condition"
 				style="width: 500px; height: 30px; font-size: 150%; vertical-align: middle;"></input> <input
 				style="vertical-align: middle;" type="image"
@@ -29,7 +29,7 @@
 		<input type="button" value="add file" id="addFile" />
 		
 		<form onsubmit="return false;"
-			action="/hibernarm-management/home/fileUpload.action" method="post"
+			action="/hibernarm-management/fileUpload.action" method="post"
 			enctype="multipart/form-data" id="uploadDomain">
 			<span id="files"> <input type='file' name='upload'
 				class="selectionExist" /><span></span><span></span><br /> <input type='file'
