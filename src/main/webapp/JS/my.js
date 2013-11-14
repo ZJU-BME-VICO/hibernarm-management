@@ -46,12 +46,12 @@ $(document).ready(function() {
 					type:"post",
 					url:"/hibernarm-management/asyn/examExist.action",
 					data:formData,
+					dataType:"json",
 					processData: false,  // tell jQuery not to process the data
 					contentType: false,  // tell jQuery not to set contentType
 				    success:function(data,textStatus,jqXHR){
-				    	var objFileExist = eval('(' + data + ')'); 
-				    	$(chooseFile).next().text(objFileExist.status);
-				    	$(chooseFile).next().next().text(objFileExist.name);
+				    	$(chooseFile).next().text(data.existStatus);
+				    	$(chooseFile).next().next().text(data.existName);
 				    }
 				});
 			}

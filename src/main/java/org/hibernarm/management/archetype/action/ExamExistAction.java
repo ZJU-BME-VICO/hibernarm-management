@@ -13,44 +13,35 @@ import org.hibernarm.management.util.ArchetypeUtil;
 import org.hibernarm.management.util.FileUtil;
 import org.hibernarm.management.util.FileExistConstant;
 
-import com.google.gson.Gson;
-
 public class ExamExistAction {
-	private String examName;
-	private String flagExisted;
+	private String existStatus;
+	private String existName;
 	private File singleFile[];
 	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
 	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
 
-	private class FileExist {
-		private String status = "";
-		private String name = "";
-	}
-
 	public String execute() {
 		String result = "success";
-
-		FileExist fe = new FileExist();
 
 		if (FileUtil.getFileType(singleFile[0]).compareToIgnoreCase("adl") == 0) {
 			ArchetypeUtil archetypeUtil = new ArchetypeUtil(singleFile[0]);
 			String archetypeId = archetypeUtil.getArchetypeId();
 			String archetypeContent = archetypeUtil.getArchetypeContent();
-			fe.name = archetypeId;
+			existName = archetypeId;
 			if (!archetypeId.isEmpty() && !archetypeContent.isEmpty()) {
 				ArchetypeBean archetypeBean = archetypeBeanDao
 						.selectByName(archetypeId);
 				if (archetypeBean != null) {
 					if (archetypeBean.getContent().compareTo(archetypeContent) == 0) {
-						fe.status = FileExistConstant.EXISTED;
+						existStatus = FileExistConstant.EXISTED;
 					} else {
-						fe.status = FileExistConstant.CHANGED;
+						existStatus = FileExistConstant.CHANGED;
 					}
 				} else {
-					fe.status = FileExistConstant.NONE;
+					existStatus = FileExistConstant.NONE;
 				}
 			} else {
-				fe.status = FileExistConstant.INVALID;
+				existStatus = FileExistConstant.INVALID;
 			}
 		}
 
@@ -58,43 +49,40 @@ public class ExamExistAction {
 			ARMUtil armUtil = new ARMUtil(singleFile[0]);
 			String archetypeId = armUtil.getArchetypeId();
 			String armContent = armUtil.getARMContent();
-			fe.name = archetypeId;
+			existName = archetypeId;
 			if (!archetypeId.isEmpty() && !armContent.isEmpty()) {
 				ARMBean armBean = armBeanDao.findByName(archetypeId);
 				if (armBean != null) {
 					if (armBean.getContent().compareTo(armContent) == 0) {
-						fe.status = FileExistConstant.EXISTED;
+						existStatus = FileExistConstant.EXISTED;
 					} else {
-						fe.status = FileExistConstant.CHANGED;
+						existStatus = FileExistConstant.CHANGED;
 					}
 				} else {
-					fe.status = FileExistConstant.NONE;
+					existStatus = FileExistConstant.NONE;
 				}
 			} else {
-				fe.status = FileExistConstant.INVALID;
+				existStatus = FileExistConstant.INVALID;
 			}
 		}
-
-		Gson g = new Gson();
-		flagExisted = g.toJson(fe);
 
 		return result;
 	}
 
-	public String getExamName() {
-		return examName;
+	public String getExistStatus() {
+		return existStatus;
 	}
 
-	public void setExamName(String examName) {
-		this.examName = examName;
+	public void setExistStatus(String existStatus) {
+		this.existStatus = existStatus;
 	}
 
-	public String getFlagExisted() {
-		return flagExisted;
+	public String getExistName() {
+		return existName;
 	}
 
-	public void setFlagExisted(String flagExisted) {
-		this.flagExisted = flagExisted;
+	public void setExistName(String existName) {
+		this.existName = existName;
 	}
 
 	public static ARMBeanDao getArmBeanDao() {

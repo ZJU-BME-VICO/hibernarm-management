@@ -34,7 +34,8 @@
 		<action name="examExist"
 			class="org.hibernarm.management.archetype.action.ExamExistAction">
 			<result  type="json">
-			   <param name="root">flagExisted</param>
+			   <param name="existStatus">existStatus</param>
+			   <param name="existName">existName</param>
 			</result>
 		</action>
 	</package>
