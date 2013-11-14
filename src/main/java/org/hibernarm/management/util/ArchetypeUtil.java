@@ -1,7 +1,6 @@
 package org.hibernarm.management.util;
 
 import java.io.File;
-import java.io.IOException;
 import org.openehr.am.archetype.Archetype;
 import org.openehr.am.serialize.ADLSerializer;
 import org.openehr.rm.support.identification.ArchetypeID;
