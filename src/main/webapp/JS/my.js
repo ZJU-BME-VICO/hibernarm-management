@@ -4,7 +4,7 @@ $(document).ready(function() {
 		});
 		$("#files").on('change','input.selectionExist',function(){
 			$(this).next().text("");
-			$(chooseFile).next().next().text("");
+			$(this).next().next().text("");
 			var chooseFile=this;
 			if(this.files.length>0){
 				var formData = new FormData();
