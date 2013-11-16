@@ -13,8 +13,10 @@
 	<body>
 		<div id="searchDiv">
 			<form method="post" action="/hibernarm-management/archetypeNameSearch.action">
+			<div id="searchBorderDiv">
 				<input id="searchInput" type="text" name="condition"></input> 
 				<input id="searchSubmit" type="image" src="image/search.png" alt="Submit"></input>
+			</div>
 			</form>
 		</div>
 		<div id="uploadDiv">

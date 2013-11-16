@@ -5,16 +5,25 @@
 	margin-right: auto;
 }
 
+#searchBorderDiv {
+	border: 2px;
+	border-style: solid;
+}
+
 #searchInput {
-	width: 724px;
+	width: 796px;
 	vertical-align: middle;
 	font-size: 150%;
+	margin-right: -34px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border: 0px;
 }
 
 #searchSubmit {
 	vertical-align: middle;
-	height: 34px;
-	width: 68px;
+	height: 30px;
+	width: 30px;
 }
 
 #uploadDiv {
