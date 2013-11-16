@@ -18,18 +18,15 @@ public class ARMBeanDaoHibernateImpl implements ARMBeanDao {
 
 	public void saveOrUpdate(ARMBean bean, Session session) {
 		try {
-			Query query = session
-					.createQuery("from ARMBean as arm where arm.name=:conditionname");
-			query.setString("conditionname", bean.getName());
-			ARMBean existBean = (ARMBean) query.uniqueResult();
+			HistoriedARMBean historiedARMBean = new HistoriedARMBean();
+			historiedARMBean.setCommitSequence(bean
+					.getCommitSequence());
+			historiedARMBean.setContent(bean.getContent());
+			historiedARMBean.setHistoriedTime(bean.getModifyTime());
+			historiedARMBean.setName(bean.getName());
+			session.save(historiedARMBean);
+			ARMBean existBean = findByName(bean.getName());
 			if (existBean != null) {
-				HistoriedARMBean historiedARMBean = new HistoriedARMBean();
-				historiedARMBean.setCommitSequence(existBean
-						.getCommitSequence());
-				historiedARMBean.setContent(existBean.getContent());
-				historiedARMBean.setHistoriedTime(bean.getModifyTime());
-				historiedARMBean.setName(existBean.getName());
-				session.save(historiedARMBean);
 				existBean.setContent(bean.getContent());
 				existBean.setModifyTime(bean.getModifyTime());
 			} else {
@@ -64,14 +61,7 @@ public class ARMBeanDaoHibernateImpl implements ARMBeanDao {
 
 	public void deleteAndRestore(ARMBean armBean, Session session) {
 		// create a historiedArmBean for armBean will be deleted
-		HistoriedARMBean armBeanReadyRemoved = new HistoriedARMBean();
-		armBeanReadyRemoved.setCommitSequence(armBean.getCommitSequence());
-		armBeanReadyRemoved.setContent(armBean.getContent());
-		armBeanReadyRemoved.setHistoriedTime(new Date(System
-				.currentTimeMillis()));
-		armBeanReadyRemoved.setName(armBean.getName());
-		session.save(armBeanReadyRemoved);
-		session.delete(armBean);
+		ARMBean armBeanStored=findByName(armBean.getName());
 		Query query = session
 				.createQuery("select harm from HistoriedARMBean as harm left join  CommitSequence as csq "
 						+ "on harm.commitSequence=csq.id where harm.name=:conditionname and  csq.commitValidation=:conditionCommitValidation "
@@ -80,14 +70,12 @@ public class ARMBeanDaoHibernateImpl implements ARMBeanDao {
 		query.setInteger("conditionCommitValidation", CommitSequenceConstant.VALIDATION_SUCCESS);
 		HistoriedARMBean readyForResoredARMBean=(HistoriedARMBean)query.uniqueResult();
 		if(readyForResoredARMBean!=null){
-			ARMBean armBeanResored=new ARMBean();
-			armBean.setCommitSequence(readyForResoredARMBean.getCommitSequence());
-			armBean.setContent(readyForResoredARMBean.getContent());
-			armBean.setModifyTime(readyForResoredARMBean.getHistoriedTime());
-			armBean.setName(readyForResoredARMBean.getName());
-			session.save(armBeanResored);
-			session.delete(readyForResoredARMBean);
-			
+			armBeanStored.setCommitSequence(readyForResoredARMBean.getCommitSequence());
+			armBeanStored.setContent(readyForResoredARMBean.getContent());
+			armBeanStored.setModifyTime(readyForResoredARMBean.getHistoriedTime());
+			armBeanStored.setName(readyForResoredARMBean.getName());	
+		}else{
+			session.delete(armBeanStored);
 		}
 
 	}

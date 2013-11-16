@@ -10,8 +10,10 @@ import org.hibernarm.management.control.action.HibernarmControl;
 import org.hibernarm.management.control.action.HibernarmControlAction;
 import org.hibernarm.management.dao.impl.ARMBeanDaoHibernateImpl;
 import org.hibernarm.management.dao.impl.ArchetypeBeanDaoHibernateImpl;
+import org.hibernarm.management.dao.impl.CommitSequenceDaoHibernateImpl;
 import org.hibernarm.management.dao.virtual.ARMBeanDao;
 import org.hibernarm.management.dao.virtual.ArchetypeBeanDao;
+import org.hibernarm.management.dao.virtual.CommitSequenceDao;
 import org.hibernarm.management.exception.CancleOneCommitException;
 import org.hibernarm.management.exception.OneTimeSaveException;
 import org.hibernarm.management.model.ARMBean;
@@ -27,6 +29,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.dao.support.DaoSupport;
 
 public class FileUploadAction {
 	private File[] upload;
@@ -36,6 +39,7 @@ public class FileUploadAction {
 	private String uploadResultDescription;
 	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
 	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
+	private static CommitSequenceDao commitSequenceDao=new CommitSequenceDaoHibernateImpl();
 	private static Logger logger = Logger.getLogger(FileUploadAction.class
 			.getName());
 
@@ -130,6 +134,7 @@ public class FileUploadAction {
 		commitSequence
 				.setCommitValidation(CommitSequenceConstant.VALIDATION_SUCCESS);
 		commitSequence.setCommitTime(modifyTime);
+		commitSequenceDao.saveCommitSequence(commitSequence);
 		List<ArchetypeBean> listArchetypeBeans = null;
 		List<ARMBean> listArmBeans = null;
 		try {
@@ -147,6 +152,7 @@ public class FileUploadAction {
 		} catch (Exception e) {
 			commitSequence
 					.setCommitValidation(CommitSequenceConstant.VALIDATION_FAIL);
+			commitSequenceDao.saveCommitSequence(commitSequence);
 			uploadResult = "fail";
 			uploadResultDescription="there are problems with file uploaded";
 			cancleAction(listArmBeans, listArchetypeBeans);

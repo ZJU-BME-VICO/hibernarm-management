@@ -63,22 +63,20 @@ public class ArchetypeBeanDaoHibernateImpl implements ArchetypeBeanDao {
 
 	public void saveOrUpdate(ArchetypeBean bean, Session session) {
 		try {
-			Query query = session
-					.createQuery("from ArchetypeBean as atb where atb.name=:conditionname");
-			query.setString("conditionname", bean.getName());
-			ArchetypeBean existBean = (ArchetypeBean) query.uniqueResult();
+			HistoriedArchetypeBean historiedArchetypeBean = new HistoriedArchetypeBean();
+			historiedArchetypeBean.setCommitSequence(bean
+					.getCommitSequence());
+			historiedArchetypeBean.setContent(bean.getContent());
+			historiedArchetypeBean.setDescription(bean.getDescription());
+			historiedArchetypeBean.setName(bean.getName());
+			historiedArchetypeBean.setHistoriedTime(bean.getModifyTime());
+			session.save(historiedArchetypeBean);
+			ArchetypeBean existBean=selectByName(bean.getName());
 			if (existBean != null) {
-				HistoriedArchetypeBean historiedArchetypeBean = new HistoriedArchetypeBean();
-				historiedArchetypeBean.setCommitSequence(existBean
-						.getCommitSequence());
-				historiedArchetypeBean.setContent(existBean.getContent());
-				historiedArchetypeBean.setDescription(existBean.getContent());
-				historiedArchetypeBean.setName(existBean.getName());
-				historiedArchetypeBean.setHistoriedTime(bean.getModifyTime());
-				session.save(historiedArchetypeBean);
 				existBean.setContent(bean.getContent());
 				existBean.setModifyTime(bean.getModifyTime());
-
+				existBean.setCommitSequence(bean.getCommitSequence());
+				existBean.setDescription(bean.getDescription());
 			} else {
 				session.save(bean);
 			}
@@ -109,20 +107,10 @@ public class ArchetypeBeanDaoHibernateImpl implements ArchetypeBeanDao {
 	}
 
 	public void deleteAndRestore(ArchetypeBean archetypeBean, Session session) {
-		HistoriedArchetypeBean archetypeBeanReadyRemoved = new HistoriedArchetypeBean();
-		//create a historiedArchetypeBean for archetypeBean which will be removed
-		archetypeBeanReadyRemoved.setCommitSequence(archetypeBean
-				.getCommitSequence());
-		archetypeBeanReadyRemoved.setContent(archetypeBean.getContent());
-		archetypeBeanReadyRemoved.setDescription(archetypeBean
-				.getDescription());
-		archetypeBeanReadyRemoved.setHistoriedTime(new Date(System
-				.currentTimeMillis()));
-		archetypeBeanReadyRemoved.setName(archetypeBean.getName());
-		session.save(archetypeBeanReadyRemoved);
-		session.delete(archetypeBean);
+		
 		//get historiedArchetypeBean for archetype restored
-		Query query = session
+        ArchetypeBean archetypeBeanStored=this.selectByName(archetypeBean.getName());
+        Query query = session
 				.createQuery("select hab from HistoriedArchetypeBean as hab left join CommitSequence as csq on hab.commitSequence=csq.id "
 						+ "where hab.name=:conditionname and csq.commitValidation=:conditionCommitValidation "
 						+ "order by csq.id desc");
@@ -130,14 +118,13 @@ public class ArchetypeBeanDaoHibernateImpl implements ArchetypeBeanDao {
 		query.setInteger("conditionCommitValidation", CommitSequenceConstant.VALIDATION_SUCCESS);
 		HistoriedArchetypeBean readyForRestoredArchetypeBean=(HistoriedArchetypeBean)query.uniqueResult();
 		if(readyForRestoredArchetypeBean!=null){
-			ArchetypeBean archetypeBeanRestored=new ArchetypeBean();
-			archetypeBeanRestored.setCommitSequence(readyForRestoredArchetypeBean.getCommitSequence());
-			archetypeBeanRestored.setContent(readyForRestoredArchetypeBean.getContent());
-			archetypeBeanRestored.setDescription(readyForRestoredArchetypeBean.getDescription());
-			archetypeBeanRestored.setModifyTime(readyForRestoredArchetypeBean.getHistoriedTime());
-			archetypeBeanRestored.setName(readyForRestoredArchetypeBean.getName());
-			session.save(archetypeBeanRestored);
-			session.delete(readyForRestoredArchetypeBean);
+			archetypeBeanStored.setCommitSequence(readyForRestoredArchetypeBean.getCommitSequence());
+			archetypeBeanStored.setContent(readyForRestoredArchetypeBean.getContent());
+			archetypeBeanStored.setDescription(readyForRestoredArchetypeBean.getDescription());
+			archetypeBeanStored.setModifyTime(readyForRestoredArchetypeBean.getHistoriedTime());
+			archetypeBeanStored.setName(readyForRestoredArchetypeBean.getName());
+		}else{
+			session.delete(archetypeBeanStored);
 		}
 		
 		

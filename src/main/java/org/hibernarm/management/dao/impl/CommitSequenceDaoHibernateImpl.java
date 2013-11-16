@@ -16,7 +16,7 @@ public class CommitSequenceDaoHibernateImpl implements CommitSequenceDao {
 		Transaction tx = session.getTransaction();
 		try {
 			tx.begin();
-			session.save(commitSequence);
+			session.saveOrUpdate(commitSequence);
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
