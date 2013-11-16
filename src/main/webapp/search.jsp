@@ -25,6 +25,7 @@
 			<input type="radio" name="overrideFile" value="Y" />Y
 			<input type="radio" name="overrideFile" value="N" checked="checked" />N
 			<input type="button" value="upload" id="uploadButton"/>
+			<span id="uploadTip"></span>
 			<form onsubmit="return false;"
 				action="/hibernarm-management/fileUpload.action" method="post"
 				enctype="multipart/form-data" id="uploadDomain">
@@ -40,7 +41,6 @@
 				</span>
 				<br/>			
 			</form>
-			<span id="uploadTip"></span>
 		</div>
 	</body>
 </html>
