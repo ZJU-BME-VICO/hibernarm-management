@@ -7,13 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 @Entity
 public class HistoriedARMBean {
 	private Integer id;
 	private String name;
 	private String content;
 	private Date historiedTime;
-	private Integer commitSequence;
+    private CommitSequence commitSequence;
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -47,12 +48,14 @@ public class HistoriedARMBean {
 	public void setHistoriedTime(Date historiedTime) {
 		this.historiedTime = historiedTime;
 	}
-
-	public Integer getCommitSequence() {
+    @ManyToOne
+	public CommitSequence getCommitSequence() {
 		return commitSequence;
 	}
 
-	public void setCommitSequence(Integer commitSequence) {
+	public void setCommitSequence(CommitSequence commitSequence) {
 		this.commitSequence = commitSequence;
 	}
+
+
 }

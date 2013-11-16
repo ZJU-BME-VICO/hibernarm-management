@@ -111,9 +111,9 @@ public class ArchetypeBeanDaoHibernateImpl implements ArchetypeBeanDao {
 		//get historiedArchetypeBean for archetype restored
         ArchetypeBean archetypeBeanStored=this.selectByName(archetypeBean.getName());
         Query query = session
-				.createQuery("select hab from HistoriedArchetypeBean as hab left join CommitSequence as csq on hab.commitSequence=csq.id "
-						+ "where hab.name=:conditionname and csq.commitValidation=:conditionCommitValidation "
-						+ "order by csq.id desc");
+				.createQuery("from HistoriedArchetypeBean as hab "
+						+ "where hab.commitSequence.commitValidation=:conditionCommitValidation and hab.name=:conditionname"
+						+ " order by hab.commitSequence.id desc ");
 		query.setString("conditionname", archetypeBean.getName());
 		query.setInteger("conditionCommitValidation", CommitSequenceConstant.VALIDATION_SUCCESS);
 		HistoriedArchetypeBean readyForRestoredArchetypeBean=(HistoriedArchetypeBean)query.uniqueResult();

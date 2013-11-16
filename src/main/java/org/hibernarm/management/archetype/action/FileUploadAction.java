@@ -85,7 +85,7 @@ public class FileUploadAction {
 
 	private static List<ArchetypeBean> constructArchetypeBeans(File[] upload,
 			String[] uploadFileName, String[] uploadContentType,
-			Date modifyTime, int version) {
+			Date modifyTime, CommitSequence version) {
 		List<ArchetypeBean> list = new ArrayList<ArchetypeBean>();
 		for (int i = 0; i < upload.length; i++) {
 			if (FileUtil.getFileType(upload[i]).compareToIgnoreCase("adl") == 0) {
@@ -107,7 +107,7 @@ public class FileUploadAction {
 
 	private static List<ARMBean> constructArmBeans(File[] upload,
 			String[] uploadFileName, String[] uploadContentType,
-			Date modifyTime, int version) {
+			Date modifyTime, CommitSequence version) {
 		List<ARMBean> list = new ArrayList<ARMBean>();
 		for (int i = 0; i < uploadFileName.length; i++) {
 			if (FileUtil.getFileType(upload[i]).compareToIgnoreCase("xml") == 0) {
@@ -140,9 +140,9 @@ public class FileUploadAction {
 		try {
 			listArchetypeBeans = constructArchetypeBeans(upload,
 					uploadFileName, uploadContentType, modifyTime,
-					commitSequence.getId());
+					commitSequence);
 			listArmBeans = constructArmBeans(upload, uploadFileName,
-					uploadContentType, modifyTime, commitSequence.getId());
+					uploadContentType, modifyTime, commitSequence);
 			saveAction(listArmBeans, listArchetypeBeans);
 			validateHibernarm();
 		} catch (OneTimeSaveException e) {

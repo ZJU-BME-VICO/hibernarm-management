@@ -63,9 +63,9 @@ public class ARMBeanDaoHibernateImpl implements ARMBeanDao {
 		// create a historiedArmBean for armBean will be deleted
 		ARMBean armBeanStored=findByName(armBean.getName());
 		Query query = session
-				.createQuery("select harm from HistoriedARMBean as harm left join  CommitSequence as csq "
-						+ "on harm.commitSequence=csq.id where harm.name=:conditionname and  csq.commitValidation=:conditionCommitValidation "
-						+ "order by csq.id desc");
+				.createQuery("from HistoriedARMBean as harm "
+						+ "where harm.name=:conditionname and  harm.commitSequence.commitValidation=:conditionCommitValidation "
+						+ "order by harm.commitSequence.id desc");
 		query.setString("conditionname", armBean.getName());
 		query.setInteger("conditionCommitValidation", CommitSequenceConstant.VALIDATION_SUCCESS);
 		HistoriedARMBean readyForResoredARMBean=(HistoriedARMBean)query.uniqueResult();

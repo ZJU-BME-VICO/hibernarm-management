@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -17,7 +18,7 @@ public class ArchetypeBean implements Serializable{
 	private String content;
 	private Date modifyTime;
     private String description;
-    private Integer commitSequence;
+    private CommitSequence commitSequence;
     
     public ArchetypeBean(){
     	
@@ -67,12 +68,14 @@ public class ArchetypeBean implements Serializable{
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-	public Integer getCommitSequence() {
+	@ManyToOne
+	public CommitSequence getCommitSequence() {
 		return commitSequence;
 	}
-	public void setCommitSequence(Integer commitSequence) {
+	public void setCommitSequence(CommitSequence commitSequence) {
 		this.commitSequence = commitSequence;
 	}
+    
     
 	
 

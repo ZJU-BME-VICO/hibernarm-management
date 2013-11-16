@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 @Entity
 public class HistoriedArchetypeBean implements Serializable{
 	private Integer id;
@@ -15,7 +16,7 @@ public class HistoriedArchetypeBean implements Serializable{
 	private String content;
 	private Date historiedTime;
     private String description;
-    private Integer commitSequence;
+    private CommitSequence commitSequence;
     
     public HistoriedArchetypeBean(){
     	
@@ -64,12 +65,14 @@ public class HistoriedArchetypeBean implements Serializable{
 	public void setHistoriedTime(Date historiedTime) {
 		this.historiedTime = historiedTime;
 	}
-	public Integer getCommitSequence() {
+	@ManyToOne
+	public CommitSequence getCommitSequence() {
 		return commitSequence;
 	}
-	public void setCommitSequence(Integer commitSequence) {
+	public void setCommitSequence(CommitSequence commitSequence) {
 		this.commitSequence = commitSequence;
 	}
+    
     
 	
 
