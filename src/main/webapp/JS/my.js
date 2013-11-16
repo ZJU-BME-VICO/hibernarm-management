@@ -24,7 +24,7 @@ $(document).ready(function() {
 			}
 			
 		});
-		$("#uploadDomain").on('click','#uploadButton',function(){
+		$("#uploadDiv").on('click','#uploadButton',function(){
 			$("#uploadTip").text("");
 			var overiddenFlag=$("input[name='overrideFile']:checked").val();
 			var fileInputList=$(".selectionExist");
