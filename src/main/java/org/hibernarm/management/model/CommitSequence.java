@@ -10,6 +10,7 @@ import javax.persistence.Id;
 public class CommitSequence implements Serializable{
 	private Integer id;
 	private Date commitTime;
+	private Integer commitValidation;
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -24,4 +25,12 @@ public class CommitSequence implements Serializable{
 	public void setCommitTime(Date commitTime) {
 		this.commitTime = commitTime;
 	}
+	public Integer getCommitValidation() {
+		return commitValidation;
+	}
+	public void setCommitValidation(Integer commitValidation) {
+		this.commitValidation = commitValidation;
+	}
+	
+	
 }

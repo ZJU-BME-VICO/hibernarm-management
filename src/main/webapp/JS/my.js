@@ -59,7 +59,7 @@ $(document).ready(function() {
 					contentType: false,  // tell jQuery not to set contentType
 				    success:function(data,textStatus,jqXHR){
                           if(data.uploadResult=="fail"){
-                        	  $("#uploadTip").text("upload files failes");
+                        	  $("#uploadTip").text("upload files failes"+data.uploadResultDescription);
                           }else if(data.uploadResult=="success"){
                         	  $("#uploadTip").text("upload files success");
                           }

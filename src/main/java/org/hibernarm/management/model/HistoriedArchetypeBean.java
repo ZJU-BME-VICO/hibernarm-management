@@ -40,7 +40,6 @@ public class HistoriedArchetypeBean implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@Column(unique = true)
 	public String getName() {
 		return name;
 	}

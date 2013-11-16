@@ -23,6 +23,7 @@ public class CommitSequenceDaoHibernateImpl implements CommitSequenceDao {
             logger.error("error when save CommitSequence:"+e.getMessage());
             throw new RuntimeException("error when save CommitSequence:"+e.getMessage());
 		}
+		session.evict(commitSequence);
 		// TODO Auto-generated method stub
 
 	}

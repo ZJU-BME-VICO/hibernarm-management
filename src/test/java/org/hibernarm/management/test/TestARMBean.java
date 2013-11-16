@@ -32,12 +32,12 @@ public class TestARMBean extends ArchetypeTestBase{
        }
 //       @Test
 	   public void testSaveAndUpdate(){
-		   ARMBean bean=new ARMBean();
-		   bean.setContent("修改测试");
-		   bean.setName("openEHR-EHR-OBSERVATION.blood_pressure.v3");
-		   ARMBeanDao dao=new ARMBeanDaoHibernateImpl();
-		   dao.saveOrUpdate(bean);
-		   HibernateUtil.closeSession();
+//		   ARMBean bean=new ARMBean();
+//		   bean.setContent("修改测试");
+//		   bean.setName("openEHR-EHR-OBSERVATION.blood_pressure.v3");
+//		   ARMBeanDao dao=new ARMBeanDaoHibernateImpl();
+//		   dao.saveOrUpdate(bean);
+//		   HibernateUtil.closeSession();
 	   }
 	   @Test
 	   public void testFindByName(){

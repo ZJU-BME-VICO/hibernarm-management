@@ -22,20 +22,20 @@ public class TestArchetypeBeanDaoHibernateImpl {
 	}
 	//@Test
 	public void testSaveOrUpdate(){
-		ArchetypeBean archetypeBean=new ArchetypeBean();
-		archetypeBean.setContent("修改测试5");
-		archetypeBean.setName("openEHR-EHR-OBSERVATION.blood_pressure.v1");
-		ArchetypeBeanDao dao=new ArchetypeBeanDaoHibernateImpl();
-		dao.saveOrUpdate(archetypeBean);
-		HibernateUtil.closeSession();
+//		ArchetypeBean archetypeBean=new ArchetypeBean();
+//		archetypeBean.setContent("修改测试5");
+//		archetypeBean.setName("openEHR-EHR-OBSERVATION.blood_pressure.v1");
+//		ArchetypeBeanDao dao=new ArchetypeBeanDaoHibernateImpl();
+//		dao.saveOrUpdate(archetypeBean);
+//		HibernateUtil.closeSession();
 	}
 	//@Test
 	public void testSaveOrUpdateBrach(){
-		ArchetypeBean archetypeBean=new ArchetypeBean();
-		archetypeBean.setContent("修改测试5");
-		archetypeBean.setName("openEHR-EHR-OBSERVATION.blood_pressure.v3");
-		ArchetypeBeanDao dao=new ArchetypeBeanDaoHibernateImpl();
-		dao.saveOrUpdate(archetypeBean);
+//		ArchetypeBean archetypeBean=new ArchetypeBean();
+//		archetypeBean.setContent("修改测试5");
+//		archetypeBean.setName("openEHR-EHR-OBSERVATION.blood_pressure.v3");
+//		ArchetypeBeanDao dao=new ArchetypeBeanDaoHibernateImpl();
+//		dao.saveOrUpdate(archetypeBean);
 	}
 	@Test
 	public void testSelectByName(){

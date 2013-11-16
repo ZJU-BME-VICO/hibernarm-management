@@ -12,14 +12,19 @@ import org.hibernarm.management.dao.impl.ARMBeanDaoHibernateImpl;
 import org.hibernarm.management.dao.impl.ArchetypeBeanDaoHibernateImpl;
 import org.hibernarm.management.dao.virtual.ARMBeanDao;
 import org.hibernarm.management.dao.virtual.ArchetypeBeanDao;
+import org.hibernarm.management.exception.CancleOneCommitException;
+import org.hibernarm.management.exception.OneTimeSaveException;
 import org.hibernarm.management.model.ARMBean;
 import org.hibernarm.management.model.ArchetypeBean;
 import org.hibernarm.management.model.CommitSequence;
 import org.hibernarm.management.util.ARMUtil;
 import org.hibernarm.management.util.ArchetypeUtil;
+import org.hibernarm.management.util.CommitSequenceConstant;
 import org.hibernarm.management.util.FileUtil;
 import org.hibernarm.management.util.HibernateUtil;
 import org.hibernarm.service.AQLExecute;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -28,6 +33,7 @@ public class FileUploadAction {
 	private String[] uploadFileName;
 	private String[] uploadContentType;
 	private String uploadResult;
+	private String uploadResultDescription;
 	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
 	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
 	private static Logger logger = Logger.getLogger(FileUploadAction.class
@@ -56,7 +62,6 @@ public class FileUploadAction {
 	public void setUploadContentType(String[] uploadContentType) {
 		this.uploadContentType = uploadContentType;
 	}
-	
 
 	public String getUploadResult() {
 		return uploadResult;
@@ -66,9 +71,17 @@ public class FileUploadAction {
 		this.uploadResult = uploadResult;
 	}
 
+	public String getUploadResultDescription() {
+		return uploadResultDescription;
+	}
+
+	public void setUploadResultDescription(String uploadResultDescription) {
+		this.uploadResultDescription = uploadResultDescription;
+	}
+
 	private static List<ArchetypeBean> constructArchetypeBeans(File[] upload,
-			String[] uploadFileName, String[] uploadContentType, Date modifyTime)
-			throws Exception {
+			String[] uploadFileName, String[] uploadContentType,
+			Date modifyTime, int version) {
 		List<ArchetypeBean> list = new ArrayList<ArchetypeBean>();
 		for (int i = 0; i < upload.length; i++) {
 			if (FileUtil.getFileType(upload[i]).compareToIgnoreCase("adl") == 0) {
@@ -80,6 +93,7 @@ public class FileUploadAction {
 					archetypeBean.setModifyTime(modifyTime);
 					archetypeBean.setContent(archetypeContent);
 					archetypeBean.setName(archetypeId);
+					archetypeBean.setCommitSequence(version);
 					list.add(archetypeBean);
 				}
 			}
@@ -88,12 +102,12 @@ public class FileUploadAction {
 	}
 
 	private static List<ARMBean> constructArmBeans(File[] upload,
-			String[] uploadFileName, String[] uploadContentType, Date modifyTime)
-			throws Exception {
+			String[] uploadFileName, String[] uploadContentType,
+			Date modifyTime, int version) {
 		List<ARMBean> list = new ArrayList<ARMBean>();
 		for (int i = 0; i < uploadFileName.length; i++) {
 			if (FileUtil.getFileType(upload[i]).compareToIgnoreCase("xml") == 0) {
-				ARMUtil armUtil = new ARMUtil(upload[i]);				
+				ARMUtil armUtil = new ARMUtil(upload[i]);
 				String archetypeId = armUtil.getArchetypeId();
 				String armContent = armUtil.getARMContent();
 				if (!archetypeId.isEmpty() && !armContent.isEmpty()) {
@@ -101,6 +115,7 @@ public class FileUploadAction {
 					armBean.setContent(armContent);
 					armBean.setModifyTime(modifyTime);
 					armBean.setName(archetypeId);
+					armBean.setCommitSequence(version);
 					list.add(armBean);
 				}
 			}
@@ -109,26 +124,33 @@ public class FileUploadAction {
 	}
 
 	public String execute() {
-		uploadResult="success";
+		uploadResult = "success";
 		Date modifyTime = new Date(System.currentTimeMillis());
-		CommitSequence commitSequence=new CommitSequence();
+		CommitSequence commitSequence = new CommitSequence();
+		commitSequence
+				.setCommitValidation(CommitSequenceConstant.VALIDATION_SUCCESS);
+		commitSequence.setCommitTime(modifyTime);
+		List<ArchetypeBean> listArchetypeBeans = null;
+		List<ARMBean> listArmBeans = null;
 		try {
-			List<ArchetypeBean> listArchetypeBeans = constructArchetypeBeans(
-					upload, uploadFileName, uploadContentType, modifyTime);
-			List<ARMBean> listArmBeans = constructArmBeans(upload,
-					uploadFileName, uploadContentType, modifyTime);
+			listArchetypeBeans = constructArchetypeBeans(upload,
+					uploadFileName, uploadContentType, modifyTime,
+					commitSequence.getId());
+			listArmBeans = constructArmBeans(upload, uploadFileName,
+					uploadContentType, modifyTime, commitSequence.getId());
+			saveAction(listArmBeans, listArchetypeBeans);
+			validateHibernarm();
+		} catch (OneTimeSaveException e) {
+			uploadResult = "fail";
+			uploadResultDescription = e.getMessage();
+			logger.error("upload file fail" + e.getMessage());
+		} catch (Exception e) {
+			commitSequence
+					.setCommitValidation(CommitSequenceConstant.VALIDATION_FAIL);
+			uploadResult = "fail";
+			uploadResultDescription="there are problems with file uploaded";
+			cancleAction(listArmBeans, listArchetypeBeans);
 
-			for (ARMBean armBean : listArmBeans) {
-				armBeanDao.saveOrUpdate(armBean);
-			}
-			for (ArchetypeBean archetypeBean : listArchetypeBeans) {
-				archetypeBeanDao.saveOrUpdate(archetypeBean);
-			}
-
-			// validateHibernarm();
-		} catch (Throwable e) {
-			uploadResult="fail";
-			logger.error("upload file fail"+e.getMessage());
 		} finally {
 			HibernateUtil.closeSession();
 		}
@@ -146,14 +168,40 @@ public class FileUploadAction {
 
 	private void saveAction(List<ARMBean> listArmBeans,
 			List<ArchetypeBean> listArchetypeBeans) {
-
-		for (ARMBean armBean : listArmBeans) {
-			armBeanDao.saveOrUpdate(armBean);
-		}
-		for (ArchetypeBean archetypeBean : listArchetypeBeans) {
-			archetypeBeanDao.saveOrUpdate(archetypeBean);
+		Session session = HibernateUtil.currentSession();
+		Transaction tx = session.getTransaction();
+		try {
+			tx.begin();
+			for (ARMBean armBean : listArmBeans) {
+				armBeanDao.saveOrUpdate(armBean, session);
+			}
+			for (ArchetypeBean archetypeBean : listArchetypeBeans) {
+				archetypeBeanDao.saveOrUpdate(archetypeBean, session);
+			}
+			tx.commit();
+		} catch (Throwable e) {
+			tx.rollback();
+			throw new OneTimeSaveException("save data uploaded this time error");
 		}
 	}
-	
 
+	private void cancleAction(List<ARMBean> listArmBeans,
+			List<ArchetypeBean> listArchetypeBeans) {
+		Session session = HibernateUtil.currentSession();
+		Transaction tx = session.getTransaction();
+		try {
+			tx.begin();
+			for (ArchetypeBean archetypeBean : listArchetypeBeans) {
+				archetypeBeanDao.deleteAndRestore(archetypeBean, session);
+			}
+			for (ARMBean armBean : listArmBeans) {
+				armBeanDao.deleteAndRestore(armBean, session);
+
+			}
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			logger.error("cancle action error" + e.getMessage());
+		}
+	}
 }

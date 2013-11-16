@@ -6,13 +6,17 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernarm.management.dao.virtual.ArchetypeBeanDao;
 import org.hibernarm.management.model.ArchetypeBean;
+import org.hibernarm.management.model.HistoriedArchetypeBean;
+import org.hibernarm.management.util.CommitSequenceConstant;
 import org.hibernarm.management.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class ArchetypeBeanDaoHibernateImpl implements ArchetypeBeanDao {
-    private static Logger logger=Logger.getLogger(ArchetypeBeanDaoHibernateImpl.class.getName());
+	private static Logger logger = Logger
+			.getLogger(ArchetypeBeanDaoHibernateImpl.class.getName());
+
 	public List<ArchetypeBean> matchProbableByName(String name) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.currentSession();
@@ -57,26 +61,32 @@ public class ArchetypeBeanDaoHibernateImpl implements ArchetypeBeanDao {
 
 	}
 
-	public void saveOrUpdate(ArchetypeBean bean) {
-		Session session = HibernateUtil.currentSession();
-		Transaction tx = session.getTransaction();
+	public void saveOrUpdate(ArchetypeBean bean, Session session) {
 		try {
-			tx.begin();
 			Query query = session
 					.createQuery("from ArchetypeBean as atb where atb.name=:conditionname");
 			query.setString("conditionname", bean.getName());
 			ArchetypeBean existBean = (ArchetypeBean) query.uniqueResult();
 			if (existBean != null) {
+				HistoriedArchetypeBean historiedArchetypeBean = new HistoriedArchetypeBean();
+				historiedArchetypeBean.setCommitSequence(existBean
+						.getCommitSequence());
+				historiedArchetypeBean.setContent(existBean.getContent());
+				historiedArchetypeBean.setDescription(existBean.getContent());
+				historiedArchetypeBean.setName(existBean.getName());
+				historiedArchetypeBean.setHistoriedTime(bean.getModifyTime());
+				session.save(historiedArchetypeBean);
 				existBean.setContent(bean.getContent());
 				existBean.setModifyTime(bean.getModifyTime());
+
 			} else {
 				session.save(bean);
 			}
-			tx.commit();
 		} catch (Exception e) {
-	        tx.rollback();
-	        logger.error("error when save or update archetypeBean:"+e.getMessage());
-			throw new RuntimeException("error when save or update archetypeBean"+e.getMessage());    
+			logger.error("error when save or update archetypeBean:"
+					+ e.getMessage());
+			throw new RuntimeException(
+					"error when save or update archetypeBean" + e.getMessage());
 		}
 		// TODO Auto-generated method stub
 
@@ -96,6 +106,41 @@ public class ArchetypeBeanDaoHibernateImpl implements ArchetypeBeanDao {
 		Query query = session.createQuery("from ArchetypeBean");
 		List<ArchetypeBean> archetypes = query.list();
 		return archetypes;
+	}
+
+	public void deleteAndRestore(ArchetypeBean archetypeBean, Session session) {
+		HistoriedArchetypeBean archetypeBeanReadyRemoved = new HistoriedArchetypeBean();
+		//create a historiedArchetypeBean for archetypeBean which will be removed
+		archetypeBeanReadyRemoved.setCommitSequence(archetypeBean
+				.getCommitSequence());
+		archetypeBeanReadyRemoved.setContent(archetypeBean.getContent());
+		archetypeBeanReadyRemoved.setDescription(archetypeBean
+				.getDescription());
+		archetypeBeanReadyRemoved.setHistoriedTime(new Date(System
+				.currentTimeMillis()));
+		archetypeBeanReadyRemoved.setName(archetypeBean.getName());
+		session.save(archetypeBeanReadyRemoved);
+		session.delete(archetypeBean);
+		//get historiedArchetypeBean for archetype restored
+		Query query = session
+				.createQuery("select hab from HistoriedArchetypeBean as hab left join CommitSequence as csq on hab.commitSequence=csq.id "
+						+ "where hab.name=:conditionname and csq.commitValidation=:conditionCommitValidation "
+						+ "order by csq.id desc");
+		query.setString("conditionname", archetypeBean.getName());
+		query.setInteger("conditionCommitValidation", CommitSequenceConstant.VALIDATION_SUCCESS);
+		HistoriedArchetypeBean readyForRestoredArchetypeBean=(HistoriedArchetypeBean)query.uniqueResult();
+		if(readyForRestoredArchetypeBean!=null){
+			ArchetypeBean archetypeBeanRestored=new ArchetypeBean();
+			archetypeBeanRestored.setCommitSequence(readyForRestoredArchetypeBean.getCommitSequence());
+			archetypeBeanRestored.setContent(readyForRestoredArchetypeBean.getContent());
+			archetypeBeanRestored.setDescription(readyForRestoredArchetypeBean.getDescription());
+			archetypeBeanRestored.setModifyTime(readyForRestoredArchetypeBean.getHistoriedTime());
+			archetypeBeanRestored.setName(readyForRestoredArchetypeBean.getName());
+			session.save(archetypeBeanRestored);
+			session.delete(readyForRestoredArchetypeBean);
+		}
+		
+		
 	}
 
 }

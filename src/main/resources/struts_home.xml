@@ -38,6 +38,7 @@
 			class="org.hibernarm.management.archetype.action.FileUploadAction">
 			<result type="json">
 			     <param name="uploadResult">uploadResult</param>
+			     <param name="uploadResultDescription">uploadResultDescription</param>
 			</result>
 		</action>
 	</package>
