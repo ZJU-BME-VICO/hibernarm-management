@@ -1,6 +1,8 @@
 package org.hibernarm.management.util;
 
 import java.io.File;
+
+import org.apache.log4j.Logger;
 import org.openehr.am.archetype.Archetype;
 import org.openehr.am.serialize.ADLSerializer;
 import org.openehr.rm.support.identification.ArchetypeID;
@@ -8,6 +10,8 @@ import org.openehr.rm.support.identification.ArchetypeID;
 import se.acode.openehr.parser.ADLParser;
 
 public class ArchetypeUtil {
+	private static Logger logger = Logger.getLogger(ArchetypeUtil.class.getName());
+	
 	private Archetype archetype = null;
 	private String archetypeId = "";
 	private String archetypeContent = "";
@@ -24,6 +28,7 @@ public class ArchetypeUtil {
 			archetype = null;
 			archetypeId = "";
 			archetypeContent = "";
+			logger.error("ArchetypeUtil error", e);
 		}
 	}
 

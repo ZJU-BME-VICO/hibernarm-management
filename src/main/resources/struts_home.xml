@@ -3,28 +3,27 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<package name="home" extends="struts-default" namespace="/">
-		<action name="homeSearch"
-			class="org.hibernarm.management.archetype.action.HomeAction">
-			<result name="success">search.jsp</result>
+		<action name="homeArchetype"
+			class="org.hibernarm.management.archetype.action.HomeArchetypeAction">
+			<result name="success">homeArchetype.jsp</result>
 		</action>
-		<action name="archetypeNameSearch"
-			class="org.hibernarm.management.archetype.action.SearchArchetypeOnlyNameAction">
-			<result name="success">archetypeResult.jsp</result>
+		<action name="searchArchetype"
+			class="org.hibernarm.management.archetype.action.SearchArchetypeAction">
+			<result name="success">searchArchetype.jsp</result>
 		</action>
-		<action name="displayAction"
-			class="org.hibernarm.management.archetype.action.DisplayPairAction">
-			<result name="success">displayPair.jsp</result>
+		<action name="displayContent"
+			class="org.hibernarm.management.archetype.action.DisplayContentAction">
+			<result name="success">displayContent.jsp</result>
 		</action>
-		<action name="download"
-			class="org.hibernarm.management.archetype.action.FileDownLoad">
+		<action name="fileDownload"
+			class="org.hibernarm.management.archetype.action.FileDownloadAction">
 			<result name="success" type="stream">
-				<param name="contentType">text/plain </param>
+				<param name="contentType">text/plain</param>
 				<param name="inputName">inputStream</param>
 				<param name="contentDisposition">attachment;filename="${keyName}.${fileType}"</param>
 				<param name="bufferSize">4096</param>
 			</result>
 		</action>
-
 	</package>
 	<package name="json" extends="json-default" namespace="/">
 		<action name="examExist"
@@ -37,8 +36,8 @@
 		<action name="fileUpload"
 			class="org.hibernarm.management.archetype.action.FileUploadAction">
 			<result type="json">
-			     <param name="uploadResult">uploadResult</param>
-			     <param name="uploadResultDescription">uploadResultDescription</param>
+				<param name="uploadResult">uploadResult</param>
+				<param name="uploadResultDescription">uploadResultDescription</param>
 			</result>
 		</action>
 	</package>

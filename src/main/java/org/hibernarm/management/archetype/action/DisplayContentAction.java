@@ -8,7 +8,7 @@ import org.hibernarm.management.model.ARMBean;
 import org.hibernarm.management.model.ArchetypeBean;
 import org.hibernarm.management.util.HibernateUtil;
 
-public class DisplayPairAction {
+public class DisplayContentAction {
 	private String keyName;
 	private ArchetypeBean archetypeBean;
 	private ARMBean armBean;
@@ -45,12 +45,10 @@ public class DisplayPairAction {
 			archetypeBean = archetypeBeanDao.selectByName(keyName);
 			armBean = armBeanDao.findByName(keyName);
 		} catch (Exception e) {
-             result="fail";
+			result = "fail";
 		} finally {
 			HibernateUtil.closeSession();
 		}
 		return result;
-
 	}
-
 }

@@ -14,8 +14,9 @@ import org.hibernarm.management.dao.impl.CommitSequenceDaoHibernateImpl;
 import org.hibernarm.management.dao.virtual.ARMBeanDao;
 import org.hibernarm.management.dao.virtual.ArchetypeBeanDao;
 import org.hibernarm.management.dao.virtual.CommitSequenceDao;
-import org.hibernarm.management.exception.CancleOneCommitException;
-import org.hibernarm.management.exception.OneTimeSaveException;
+import org.hibernarm.management.exception.HibernarmValidationException;
+import org.hibernarm.management.exception.RestoreFileException;
+import org.hibernarm.management.exception.SaveFileException;
 import org.hibernarm.management.model.ARMBean;
 import org.hibernarm.management.model.ArchetypeBean;
 import org.hibernarm.management.model.CommitSequence;
@@ -29,9 +30,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.dao.support.DaoSupport;
 
 public class FileUploadAction {
+	private static Logger logger = Logger.getLogger(FileUploadAction.class
+			.getName());
+
 	private File[] upload;
 	private String[] uploadFileName;
 	private String[] uploadContentType;
@@ -39,9 +42,7 @@ public class FileUploadAction {
 	private String uploadResultDescription;
 	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
 	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
-	private static CommitSequenceDao commitSequenceDao=new CommitSequenceDaoHibernateImpl();
-	private static Logger logger = Logger.getLogger(FileUploadAction.class
-			.getName());
+	private static CommitSequenceDao commitSequenceDao = new CommitSequenceDaoHibernateImpl();
 
 	public File[] getUpload() {
 		return upload;
@@ -129,15 +130,16 @@ public class FileUploadAction {
 
 	public String execute() {
 		uploadResult = "success";
-		Date modifyTime = new Date(System.currentTimeMillis());
-		CommitSequence commitSequence = new CommitSequence();
-		commitSequence
-				.setCommitValidation(CommitSequenceConstant.VALIDATION_SUCCESS);
-		commitSequence.setCommitTime(modifyTime);
-		commitSequenceDao.saveCommitSequence(commitSequence);
 		List<ArchetypeBean> listArchetypeBeans = null;
 		List<ARMBean> listArmBeans = null;
+		CommitSequence commitSequence = null;
 		try {
+			Date modifyTime = new Date(System.currentTimeMillis());
+			commitSequence = new CommitSequence();
+			commitSequence
+					.setCommitValidation(CommitSequenceConstant.VALID);
+			commitSequence.setCommitTime(modifyTime);
+			commitSequenceDao.saveCommitSequence(commitSequence);
 			listArchetypeBeans = constructArchetypeBeans(upload,
 					uploadFileName, uploadContentType, modifyTime,
 					commitSequence);
@@ -145,18 +147,26 @@ public class FileUploadAction {
 					uploadContentType, modifyTime, commitSequence);
 			saveAction(listArmBeans, listArchetypeBeans);
 			validateHibernarm();
-		} catch (OneTimeSaveException e) {
+		} catch (SaveFileException e) {
 			uploadResult = "fail";
-			uploadResultDescription = e.getMessage();
-			logger.error("upload file fail" + e.getMessage());
-		} catch (Exception e) {
+			uploadResultDescription = "Error occured during save file to database";
+			logger.error("Error occured during save file to database", e);
+		} catch (HibernarmValidationException e) {
+			uploadResult = "fail";
+			uploadResultDescription = "Error occured during validate hibernarm";
+			logger.error("Error occured during validate hibernarm", e);
 			commitSequence
-					.setCommitValidation(CommitSequenceConstant.VALIDATION_FAIL);
+					.setCommitValidation(CommitSequenceConstant.INVALID);
 			commitSequenceDao.saveCommitSequence(commitSequence);
+			cancelAction(listArmBeans, listArchetypeBeans);
+		} catch (Throwable e) {
 			uploadResult = "fail";
-			uploadResultDescription="there are problems with file uploaded";
-			cancleAction(listArmBeans, listArchetypeBeans);
-
+			uploadResultDescription = "Error occured during upload file";
+			logger.error("Error occured during upload file", e);
+			commitSequence
+					.setCommitValidation(CommitSequenceConstant.INVALID);
+			commitSequenceDao.saveCommitSequence(commitSequence);
+			cancelAction(listArmBeans, listArchetypeBeans);
 		} finally {
 			HibernateUtil.closeSession();
 		}
@@ -164,16 +174,22 @@ public class FileUploadAction {
 	}
 
 	protected void validateHibernarm() {
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"applicationContext.xml", HibernarmControlAction.class);
-		AQLExecute client = (AQLExecute) context.getBean("wsclientvalidation");
+		try {
+			@SuppressWarnings("resource")
+			ApplicationContext context = new ClassPathXmlApplicationContext(
+					"applicationContext.xml", HibernarmControlAction.class);
+			AQLExecute client = (AQLExecute) context
+					.getBean("wsclientvalidation");
 
-		HibernarmControl control = new HibernarmControl();
-		control.execute(client);
+			HibernarmControl control = new HibernarmControl();
+			control.execute(client);
+		} catch (Exception e) {
+			throw new HibernarmValidationException(e);
+		}
 	}
 
 	private void saveAction(List<ARMBean> listArmBeans,
-			List<ArchetypeBean> listArchetypeBeans) {
+			List<ArchetypeBean> listArchetypeBeans) throws Throwable {
 		Session session = HibernateUtil.currentSession();
 		Transaction tx = session.getTransaction();
 		try {
@@ -187,11 +203,11 @@ public class FileUploadAction {
 			tx.commit();
 		} catch (Throwable e) {
 			tx.rollback();
-			throw new OneTimeSaveException("save data uploaded this time error");
+			throw new SaveFileException(e);
 		}
 	}
 
-	private void cancleAction(List<ARMBean> listArmBeans,
+	private void cancelAction(List<ARMBean> listArmBeans,
 			List<ArchetypeBean> listArchetypeBeans) {
 		Session session = HibernateUtil.currentSession();
 		Transaction tx = session.getTransaction();
@@ -202,12 +218,11 @@ public class FileUploadAction {
 			}
 			for (ARMBean armBean : listArmBeans) {
 				armBeanDao.deleteAndRestore(armBean, session);
-
 			}
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
-			logger.error("cancle action error" + e.getMessage());
+			throw new RestoreFileException(e);
 		}
 	}
 }

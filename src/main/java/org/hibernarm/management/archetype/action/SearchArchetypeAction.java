@@ -7,7 +7,7 @@ import org.hibernarm.management.dao.virtual.ArchetypeBeanDao;
 import org.hibernarm.management.model.ArchetypeBean;
 import org.hibernarm.management.util.HibernateUtil;
 
-public class SearchArchetypeOnlyNameAction {
+public class SearchArchetypeAction {
 	private String condition;
 	private List<ArchetypeBean> archetypeBeanList;
 	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
@@ -17,9 +17,8 @@ public class SearchArchetypeOnlyNameAction {
 		try {
 			archetypeBeanList = archetypeBeanDao
 					.matchProbableByNamePart(condition);
-			HibernateUtil.closeSession();
 		} catch (Exception e) {
-            result="fail";
+			result = "fail";
 		} finally {
 			HibernateUtil.closeSession();
 		}
@@ -41,5 +40,4 @@ public class SearchArchetypeOnlyNameAction {
 	public void setArchetypeBeanList(List<ArchetypeBean> archetypeBeanList) {
 		this.archetypeBeanList = archetypeBeanList;
 	}
-
 }

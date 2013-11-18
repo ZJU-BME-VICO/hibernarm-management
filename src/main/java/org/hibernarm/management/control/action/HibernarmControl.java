@@ -20,8 +20,8 @@ public class HibernarmControl {
 		for (ArchetypeBean archetype : archetypes) {
 			ARMBean arm = getArm(archetype.getName(), arms);
 			if (arm != null) {
-				client.registerArchetype(
-					archetype.getName(), archetype.getContent(), arm.getContent());
+				client.registerArchetype(archetype.getName(),
+						archetype.getContent(), arm.getContent());
 			}
 		}
 		client.reconfigure();

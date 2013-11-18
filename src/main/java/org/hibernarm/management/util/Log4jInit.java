@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServlet;
 
 import org.apache.log4j.PropertyConfigurator;
 
-public class Log4jInit extends HttpServlet {
-	
+public class Log4jInit extends HttpServlet {	
+	private static final long serialVersionUID = -3098001879227185756L;
+
 	public Log4jInit() {
 
 	}
@@ -31,5 +32,4 @@ public class Log4jInit extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
 }

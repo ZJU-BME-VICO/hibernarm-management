@@ -3,14 +3,16 @@ package org.hibernarm.management.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 public class FileUtil {
+	private static Logger logger = Logger.getLogger(FileUtil.class.getName());
+
 	private final static Map<String, String> FILE_TYPE_MAP = new HashMap<String, String>();
 
 	private FileUtil() {
@@ -36,7 +38,7 @@ public class FileUtil {
 		FILE_TYPE_MAP.put("7b5c727466315c616e73", "rtf");
 		FILE_TYPE_MAP.put("38425053000100000000", "psd");
 		FILE_TYPE_MAP.put("46726f6d3a203d3f6762", "eml");
-		FILE_TYPE_MAP.put("d0cf11e0a1b11ae10000", "doc"); 
+		FILE_TYPE_MAP.put("d0cf11e0a1b11ae10000", "doc");
 		FILE_TYPE_MAP.put("d0cf11e0a1b11ae10000", "vsd");
 		FILE_TYPE_MAP.put("5374616E64617264204A", "mdb");
 		FILE_TYPE_MAP.put("255044462d312e350d0a", "pdf");
@@ -98,12 +100,11 @@ public class FileUtil {
 	public static String getFileType(File file) {
 		String res = "";
 		try {
-			@SuppressWarnings("resource")
 			FileInputStream fis = new FileInputStream(file);
 			byte[] b = new byte[10];
 			fis.read(b, 0, b.length);
+			fis.close();	
 			String fileCode = bytesToHexString(b);
-
 			Iterator<String> keyIter = FILE_TYPE_MAP.keySet().iterator();
 			while (keyIter.hasNext()) {
 				String key = keyIter.next();
@@ -113,16 +114,14 @@ public class FileUtil {
 					break;
 				}
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error("getFileType error", e);
 		}
 		return res;
 	}
 
 	public static String extractContent(File file) throws Exception {
-		String fileContent = null;
+		String fileContent = "";
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new InputStreamReader(
@@ -134,11 +133,10 @@ public class FileUtil {
 			}
 			fileContent = content.toString();
 		} catch (Exception e) {
-			throw new Exception("提取文件内容出错");
+			logger.error("extractContent error", e);
 		} finally {
 			reader.close();
 		}
-
 		return fileContent;
 	}
 }

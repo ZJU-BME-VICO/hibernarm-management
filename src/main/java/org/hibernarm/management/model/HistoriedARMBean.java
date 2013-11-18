@@ -1,21 +1,25 @@
 package org.hibernarm.management.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+
 @Entity
-public class HistoriedARMBean {
+public class HistoriedARMBean implements Serializable {
+	private static final long serialVersionUID = 8129161833339416767L;
+	
 	private Integer id;
 	private String name;
 	private String content;
 	private Date historiedTime;
     private CommitSequence commitSequence;
-	@Id
+	
+    @Id
 	@GeneratedValue
 	public Integer getId() {
 		return id;
@@ -32,6 +36,7 @@ public class HistoriedARMBean {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	@Lob
 	public String getContent() {
 		return content;
@@ -48,7 +53,8 @@ public class HistoriedARMBean {
 	public void setHistoriedTime(Date historiedTime) {
 		this.historiedTime = historiedTime;
 	}
-    @ManyToOne
+    
+	@ManyToOne
 	public CommitSequence getCommitSequence() {
 		return commitSequence;
 	}
@@ -56,6 +62,4 @@ public class HistoriedARMBean {
 	public void setCommitSequence(CommitSequence commitSequence) {
 		this.commitSequence = commitSequence;
 	}
-
-
 }

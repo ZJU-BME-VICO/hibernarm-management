@@ -1,9 +1,7 @@
 package org.hibernarm.management.dao.impl;
 
-import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.hibernarm.management.dao.virtual.ARMBeanDao;
 import org.hibernarm.management.model.ARMBean;
 import org.hibernarm.management.model.HistoriedARMBean;
@@ -13,31 +11,21 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 public class ARMBeanDaoHibernateImpl implements ARMBeanDao {
-	private static Logger logger = Logger
-			.getLogger(ARMBeanDaoHibernateImpl.class.getName());
-
 	public void saveOrUpdate(ARMBean bean, Session session) {
-		try {
-			HistoriedARMBean historiedARMBean = new HistoriedARMBean();
-			historiedARMBean.setCommitSequence(bean
-					.getCommitSequence());
-			historiedARMBean.setContent(bean.getContent());
-			historiedARMBean.setHistoriedTime(bean.getModifyTime());
-			historiedARMBean.setName(bean.getName());
-			session.save(historiedARMBean);
-			ARMBean existBean = findByName(bean.getName());
-			if (existBean != null) {
-				existBean.setContent(bean.getContent());
-				existBean.setModifyTime(bean.getModifyTime());
-			} else {
-				session.save(bean);
-			}
-		} catch (Exception e) {
-			logger.error("error when save or update ARMBean" + e.getMessage());
-			throw new RuntimeException("error when save or update ARMBean"
-					+ e.getMessage());
+		HistoriedARMBean historiedARMBean = new HistoriedARMBean();
+		historiedARMBean.setCommitSequence(bean.getCommitSequence());
+		historiedARMBean.setContent(bean.getContent());
+		historiedARMBean.setHistoriedTime(bean.getModifyTime());
+		historiedARMBean.setName(bean.getName());
+		session.save(historiedARMBean);
+		ARMBean existBean = findByName(bean.getName());
+		if (existBean != null) {
+			existBean.setContent(bean.getContent());
+			existBean.setModifyTime(bean.getModifyTime());
+			existBean.setCommitSequence(bean.getCommitSequence());
+		} else {
+			session.save(bean);
 		}
-
 	}
 
 	public ARMBean findByName(String name) {
@@ -55,28 +43,30 @@ public class ARMBeanDaoHibernateImpl implements ARMBeanDao {
 	public List<ARMBean> selectAll() {
 		Session session = HibernateUtil.currentSession();
 		Query query = session.createQuery("from ARMBean");
+		@SuppressWarnings("unchecked")
 		List<ARMBean> arms = query.list();
 		return arms;
 	}
 
 	public void deleteAndRestore(ARMBean armBean, Session session) {
-		// create a historiedArmBean for armBean will be deleted
-		ARMBean armBeanStored=findByName(armBean.getName());
+		ARMBean armBeanRestored = findByName(armBean.getName());
 		Query query = session
 				.createQuery("from HistoriedARMBean as harm "
-						+ "where harm.name=:conditionname and  harm.commitSequence.commitValidation=:conditionCommitValidation "
+						+ "where harm.name=:conditionname and harm.commitSequence.commitValidation=:conditionCommitValidation "
 						+ "order by harm.commitSequence.id desc");
 		query.setString("conditionname", armBean.getName());
-		query.setInteger("conditionCommitValidation", CommitSequenceConstant.VALIDATION_SUCCESS);
-		HistoriedARMBean readyForResoredARMBean=(HistoriedARMBean)query.uniqueResult();
-		if(readyForResoredARMBean!=null){
-			armBeanStored.setCommitSequence(readyForResoredARMBean.getCommitSequence());
-			armBeanStored.setContent(readyForResoredARMBean.getContent());
-			armBeanStored.setModifyTime(readyForResoredARMBean.getHistoriedTime());
-			armBeanStored.setName(readyForResoredARMBean.getName());	
-		}else{
-			session.delete(armBeanStored);
+		query.setString("conditionCommitValidation",
+				CommitSequenceConstant.VALID);
+		HistoriedARMBean armBeanValidated = (HistoriedARMBean) query
+				.uniqueResult();
+		if (armBeanValidated != null) {
+			armBeanRestored.setCommitSequence(armBeanValidated
+					.getCommitSequence());
+			armBeanRestored.setContent(armBeanValidated.getContent());
+			armBeanRestored.setModifyTime(armBeanValidated.getHistoriedTime());
+			armBeanRestored.setName(armBeanValidated.getName());
+		} else {
+			session.delete(armBeanRestored);
 		}
-
 	}
 }

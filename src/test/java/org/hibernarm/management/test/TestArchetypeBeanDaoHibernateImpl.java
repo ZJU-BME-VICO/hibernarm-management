@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernarm.management.dao.impl.ArchetypeBeanDaoHibernateImpl;
 import org.hibernarm.management.dao.virtual.ArchetypeBeanDao;
 import org.hibernarm.management.model.ArchetypeBean;
-import org.hibernarm.management.util.HibernateUtil;
 import org.junit.Test;
 
 public class TestArchetypeBeanDaoHibernateImpl {

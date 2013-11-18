@@ -60,7 +60,8 @@
 }
 
 #uploadDistrict {
-	margin-top: 20px; height : 300px;
+	margin-top: 20px;
+	height: 300px;
 	width: 100%;
 	clear: both;
 	height: 300px;
@@ -83,11 +84,13 @@
 	height: 300px;
 	float: left;
 }
-#addFile{
-	width:40px;
-	height:30px;
+
+#addFile {
+	width: 40px;
+	height: 30px;
 }
-#uploadButton{
-    width:40px;
-	height:30px;
+
+#uploadButton {
+	width: 40px;
+	height: 30px;
 }

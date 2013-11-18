@@ -6,15 +6,8 @@ import org.hibernarm.management.model.ArchetypeBean;
 import org.hibernate.Session;
 
 public interface ArchetypeBeanDao {
-	/*
-	 * @author bleachzou according name select ArchetypeBean
-	 */
 	List<ArchetypeBean> matchProbableByName(String name);
 
-	/*
-	 * @author bleachzou according name select ArchetypeBean and implementing
-	 * paging
-	 */
 	List<ArchetypeBean> matchProbableByNamePaging(String name,
 			int sequenceOfPage, int perPageAmount);
 
@@ -22,15 +15,12 @@ public interface ArchetypeBeanDao {
 
 	List<ArchetypeBean> matchProbableByNamePagingPart(String name,
 			int sequenceOfPage, int perPageAmount);
-	/*
-	 * @bleachzou according name  find whether the passed ArchetypeBean is exist,
-	 * if it is exist then update it,otherwise insert a new one
-	 */
-	void saveOrUpdate(ArchetypeBean bean,Session seesion);
-	
+
+	void saveOrUpdate(ArchetypeBean bean, Session seesion);
+
 	ArchetypeBean selectByName(String name);
-	
+
 	List<ArchetypeBean> selectAll();
+
 	void deleteAndRestore(ArchetypeBean archetypeBean, Session session);
-	
 }

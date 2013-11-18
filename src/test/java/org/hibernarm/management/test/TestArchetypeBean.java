@@ -2,10 +2,6 @@ package org.hibernarm.management.test;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.hibernarm.management.model.ArchetypeBean;
 import org.hibernarm.management.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

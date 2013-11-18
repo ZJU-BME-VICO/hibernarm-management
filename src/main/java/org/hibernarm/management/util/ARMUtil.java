@@ -15,11 +15,14 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 public class ARMUtil {
+	private static Logger logger = Logger.getLogger(ARMUtil.class.getName());
+	
 	private Document doc = null;
 	private String archetypeId = "";
 	private String armContent = "";
@@ -29,7 +32,7 @@ public class ARMUtil {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dbBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dbBuilder.parse(armFile);
+			doc = dbBuilder.parse(armFile);
 			XPath xpath = XPathFactory.newInstance().newXPath();
 			Node classNode = (Node) xpath.evaluate("/hibernate-mapping/class",
 					doc, XPathConstants.NODE);
@@ -50,6 +53,7 @@ public class ARMUtil {
 			doc = null;
 			archetypeId = "";
 			armContent = "";
+			logger.error("ARMUtil error", e);
 		}
 	}
 

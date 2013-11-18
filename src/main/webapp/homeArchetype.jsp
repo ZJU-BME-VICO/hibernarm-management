@@ -5,10 +5,9 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>CDRSearch</title>
-		<link rel=stylesheet type="text/css" href="CSS/home.css">
+		<link rel=stylesheet type="text/css" href="CSS/homeArchetype.css">
 		<script src="JS/jquery-2.0.3.js"></script>
-		<script type="text/javascript" src="JS/my.js"></script>
+		<script type="text/javascript" src="JS/homeArchetype.js"></script>
 	</head>
 	<body>
 	<div id="wrap">
@@ -21,7 +20,7 @@
 	             <div id="pictureFlagTakeSecond"></div>            
 	        </div>
 			<div id="searchDiv">
-				<form method="post" action="/hibernarm-management/archetypeNameSearch.action">
+				<form method="post" action="/hibernarm-management/searchArchetype.action">
 				<div id="searchBorderDiv">
 					<input id="searchInput" type="text" name="condition"></input> 
 					<input id="searchSubmit" type="image" src="image/search.png" alt="Submit"></input>
@@ -53,8 +52,7 @@
 					</span>
 					<br/>			
 				</form>
-			</div>
-			
+			</div>			
 			</div>
 	  </div>
 	</div>

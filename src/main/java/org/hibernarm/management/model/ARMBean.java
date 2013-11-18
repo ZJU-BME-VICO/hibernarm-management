@@ -9,13 +9,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+
 @Entity
-public class ARMBean implements Serializable{
+public class ARMBean implements Serializable {
+	private static final long serialVersionUID = -1357307235997863794L;
+
 	private Integer id;
 	private String name;
 	private String content;
 	private Date modifyTime;
 	private CommitSequence commitSequence;
+
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -25,6 +29,7 @@ public class ARMBean implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	@Column(unique = true)
 	public String getName() {
 		return name;
@@ -33,6 +38,7 @@ public class ARMBean implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	@Lob
 	public String getContent() {
 		return content;
@@ -41,7 +47,7 @@ public class ARMBean implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
 	public Date getModifyTime() {
 		return modifyTime;
 	}
@@ -49,7 +55,8 @@ public class ARMBean implements Serializable{
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-    @ManyToOne
+
+	@ManyToOne
 	public CommitSequence getCommitSequence() {
 		return commitSequence;
 	}
@@ -57,7 +64,4 @@ public class ARMBean implements Serializable{
 	public void setCommitSequence(CommitSequence commitSequence) {
 		this.commitSequence = commitSequence;
 	}
-
-
-    
 }

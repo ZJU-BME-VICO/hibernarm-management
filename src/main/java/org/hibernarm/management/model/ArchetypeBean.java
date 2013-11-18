@@ -10,24 +10,27 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
-
 @Entity
-public class ArchetypeBean implements Serializable{
+public class ArchetypeBean implements Serializable {
+	private static final long serialVersionUID = -3471987239141601807L;
+
 	private Integer id;
 	private String name;
 	private String content;
 	private Date modifyTime;
-    private String description;
-    private CommitSequence commitSequence;
-    
-    public ArchetypeBean(){
-    	
-    }
-    public ArchetypeBean(String name,String description){
-    	this.name=name;
-    	this.description=description;
-    }
-    @Lob
+	private String description;
+	private CommitSequence commitSequence;
+
+	public ArchetypeBean() {
+
+	}
+
+	public ArchetypeBean(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
+
+	@Lob
 	public String getDescription() {
 		return description;
 	}
@@ -35,6 +38,7 @@ public class ArchetypeBean implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -44,6 +48,7 @@ public class ArchetypeBean implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	@Column(unique = true)
 	public String getName() {
 		return name;
@@ -52,6 +57,7 @@ public class ArchetypeBean implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	@Lob
 	public String getContent() {
 		return content;
@@ -60,7 +66,7 @@ public class ArchetypeBean implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
 	public Date getModifyTime() {
 		return modifyTime;
 	}
@@ -68,15 +74,13 @@ public class ArchetypeBean implements Serializable{
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
+
 	@ManyToOne
 	public CommitSequence getCommitSequence() {
 		return commitSequence;
 	}
+
 	public void setCommitSequence(CommitSequence commitSequence) {
 		this.commitSequence = commitSequence;
 	}
-    
-    
-	
-
 }
