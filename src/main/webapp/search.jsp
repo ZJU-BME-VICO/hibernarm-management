@@ -11,36 +11,52 @@
 		<script type="text/javascript" src="JS/my.js"></script>
 	</head>
 	<body>
-		<div id="searchDiv">
-			<form method="post" action="/hibernarm-management/archetypeNameSearch.action">
-			<div id="searchBorderDiv">
-				<input id="searchInput" type="text" name="condition"></input> 
-				<input id="searchSubmit" type="image" src="image/search.png" alt="Submit"></input>
+	<div id="wrap">
+	    <div id="header">
+	    </div>
+	    <div id="mainContent">
+	        <div id="pictureFlag">
+	             <div id="pictureFlagTakeFirst"></div>
+	             <div id="mainPictureFlag"></div>
+	             <div id="pictureFlagTakeSecond"></div>            
+	        </div>
+			<div id="searchDiv">
+				<form method="post" action="/hibernarm-management/archetypeNameSearch.action">
+				<div id="searchBorderDiv">
+					<input id="searchInput" type="text" name="condition"></input> 
+					<input id="searchSubmit" type="image" src="image/search.png" alt="Submit"></input>
+				</div>
+				</form>
 			</div>
-			</form>
-		</div>
-		<div id="uploadDiv">
-			<input type="button" value="add file" id="addFile" />
-			Override existed?
-			<input type="radio" name="overrideFile" value="Y" />Y
-			<input type="radio" name="overrideFile" value="N" checked="checked" />N
-			<input type="button" value="upload" id="uploadButton"/>
-			<span id="uploadTip"></span>
-			<form onsubmit="return false;"
-				action="/hibernarm-management/fileUpload.action" method="post"
-				enctype="multipart/form-data" id="uploadDomain">
-				<span id="files"> 
-					<input type='file' name='upload' class="selectionExist" />
-					<span></span>
-					<span></span>
-					<br /> 
-					<input type='file' name='upload' class="selectionExist" />
-					<span></span>
-					<span></span>
-					<br />
-				</span>
-				<br/>			
-			</form>
-		</div>
+			<div id="uploadDistrict">
+			<div id="uploadDistrictTakenFirt"></div>
+			<div id="uploadDistrictTakenSecond"></div>
+			<div id="uploadDiv">
+				<input type="image" src="image/AddFile.png" id="addFile" />
+				Override existed?
+				<input type="radio" name="overrideFile" value="Y" />Y
+				<input type="radio" name="overrideFile" value="N" checked="checked" />N
+				<input type="image" src="image/upload.jpg" id="uploadButton"/>
+				<span id="uploadTip"></span>
+				<form onsubmit="return false;"
+					action="/hibernarm-management/fileUpload.action" method="post"
+					enctype="multipart/form-data" id="uploadDomain">
+					<span id="files"> 
+						<input type='file' name='upload' class="selectionExist"/>
+						<span></span>
+						<span></span>
+						<br /> 
+						<input type='file' name='upload' class="selectionExist" />
+						<span></span>
+						<span></span>
+						<br />
+					</span>
+					<br/>			
+				</form>
+			</div>
+			
+			</div>
+	  </div>
+	</div>
 	</body>
 </html>

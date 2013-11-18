@@ -1,34 +1,93 @@
 #searchDiv {
-	margin-top: 200px;
 	width: 800px;
-	margin-left: auto;
 	margin-right: auto;
+	width: 100%;
+	margin-top: 20px;
+	clear: both;
+	padding-left: 20%
 }
 
 #searchBorderDiv {
+	width: 60%;
 	border: 2px;
 	border-style: solid;
 }
 
 #searchInput {
-	width: 796px;
+	width: 100%;
 	vertical-align: middle;
 	font-size: 150%;
-	margin-right: -34px;
+	margin-right: -45px;
 	margin-top: 0px;
 	margin-bottom: 0px;
 	border: 0px;
 }
 
 #searchSubmit {
+	width: 10%;
 	vertical-align: middle;
 	height: 30px;
 	width: 30px;
 }
 
+#pictureFlag {
+	margin-top: 20px;
+	width: 100%;
+}
+
+#pictureFlagTakeFirst {
+	width: 20%;
+	height: 320px;
+	float: left
+}
+
+#pictureFlagTakeSecond {
+	width: 20%;
+	height: 320px;
+}
+
+#mainPictureFlag {
+	width: 60%;
+	height: 320px;
+	background-color: #4B0082;
+	float: left;
+}
+
+#header {
+	height: 40px;
+	width: 100%;
+	background-color: #4B0082
+}
+
+#uploadDistrict {
+	margin-top: 20px; height : 300px;
+	width: 100%;
+	clear: both;
+	height: 300px;
+}
+
+#uploadDistrictTakenFirt {
+	width: 20%;
+	heigt: 300px;
+	float: left;
+}
+
 #uploadDiv {
-	margin-top: 50px;
-	width: 800px;
-	margin-left: auto;
-	margin-right: auto;
+	width: 60%;
+	float: left;
+	height: 300px
+}
+
+#uploadDistrictTakenSecond {
+	width: 20%;
+	height: 300px;
+	float: left;
+}
+#addFile{
+	width:40px;
+	height:30px;
+}
+#uploadButton{
+    width:40px;
+	height:30px;
 }
