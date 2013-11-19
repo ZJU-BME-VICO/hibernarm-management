@@ -46,6 +46,7 @@ $(document).ready(function() {
                   }
 			}
 			if(fileListSent.length>0){
+				$("#uploadTip").html("<img src='image/progressbar.gif' width='40' height='30' />");				
 				var formData = new FormData();		
 				for(var i=0;i<fileListSent.length;i++){
 					formData.append("upload",fileListSent[i]);
@@ -65,6 +66,14 @@ $(document).ready(function() {
                           }
 				    }
 				});
+				$("#files").html("<input type='file' name='upload' class='selectionExist'/>"+
+									"<span></span>"+
+									"<span></span>"+
+									"<br />"+ 
+									"<input type='file' name='upload' class='selectionExist' />"+
+									"<span></span>"+
+									"<span></span>"+
+									"<br />");
 			}else if(fileListSent.length==0){
 				 $("#uploadTip").text("there are no files needed to be uploaded");
 			}
