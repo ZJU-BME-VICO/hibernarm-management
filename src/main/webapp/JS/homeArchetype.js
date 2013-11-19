@@ -7,6 +7,7 @@ $(document).ready(function() {
 		$(this).next().next().text("");
 		var chooseFile = this;
 		if(this.files.length>0) {
+			$(this).next().html("<img src='image/loading.gif' width='30' height='30' />");
 			var formData = new FormData();
 			formData.append("singleFile",this.files[0]);
 			$.ajax({
