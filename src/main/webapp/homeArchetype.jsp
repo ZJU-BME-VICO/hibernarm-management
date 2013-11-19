@@ -32,7 +32,7 @@
 			<div id="uploadDistrictTakenSecond"></div>
 			<div id="uploadDiv">
 				<input type="image" src="image/AddFile.png" id="addFile" />
-				Override existed?
+				Override changed?
 				<input type="radio" name="overrideFile" value="Y" />Y
 				<input type="radio" name="overrideFile" value="N" checked="checked" />N
 				<input type="image" src="image/upload.jpg" id="uploadButton"/>
