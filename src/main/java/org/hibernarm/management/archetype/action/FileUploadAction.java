@@ -114,8 +114,7 @@ public class FileUploadAction {
 			if (FileUtil.getFileType(upload[i]).compareToIgnoreCase("xml") == 0) {
 				ARMUtil armUtil = new ARMUtil(upload[i]);
 				String archetypeId = armUtil.getArchetypeId();
-//				String armContent = armUtil.getARMContent();
-				String armContent = FileUtil.extractContent(upload[i]);
+				String armContent = armUtil.getARMContent();
 				if (!archetypeId.isEmpty() && !armContent.isEmpty()) {
 					ARMBean armBean = new ARMBean();
 					armBean.setContent(armContent);
