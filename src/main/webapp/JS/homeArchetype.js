@@ -1,18 +1,19 @@
 $(document).ready(function() {
+	var fileUploadControlSourceCode = "<input type='file' name='upload' class='selectionExist'/><span></span><span></span><br/>";
 	$("#addFile").click(function() {
-		$("#files").append("<input type='file' name='upload' class='selectionExist'/><span></span><span></span><br/>");
+		$("#files").append(fileUploadControlSourceCode);
 	});
 	$("#files").on('change','input.selectionExist',function() {
 		$(this).next().text("");
 		$(this).next().next().text("");
 		var chooseFile = this;
 		if(this.files.length>0) {
-			$(this).next().html("<img src='image/loading.gif' width='30' height='30' />");
+			$(this).next().html("<img src='image/loading.gif' width='30' height='30' style='vertical-align: middle;' />");
 			var formData = new FormData();
 			formData.append("singleFile",this.files[0]);
 			$.ajax({
 				type: "post",
-				url: "/hibernarm-management/examExist.action",
+				url: "/hibernarm-management/fileExist.action",
 				data: formData,
 				dataType: "json",
 				processData: false,  // tell jQuery not to process the data
@@ -24,60 +25,49 @@ $(document).ready(function() {
 			});
 		}
 	});
-	$("#uploadDiv").on('click','#uploadButton',function(){
-			$("#uploadTip").text("");
-			var overiddenFlag=$("input[name='overrideFile']:checked").val();
-			var fileInputList=$(".selectionExist");
-			var fileListSent=[];
-			for(var i=0;i<fileInputList.length;i++){
-                  if(fileInputList[i].files.length>0){
-                	  if($(fileInputList[i]).next().text()==""){
-                		  $("#uploadTip").text("validation of files is executing,wait a moment");
-                		  return;
-                	  }
-                	  if($(fileInputList[i]).next().text()=="NONE"){
-                		  fileListSent.push(fileInputList[i].files[0]);               		  
-                	  }
-                	  if($(fileInputList[i]).next().text()=="CHANGED"&&overiddenFlag=="Y"){
-                		  fileListSent.push(fileInputList[i].files[0]);               		  
-                	  }
-                	  
-                	
-                  }
-			}
-			if(fileListSent.length>0){
-				$("#uploadTip").html("<img src='image/progressbar.gif' width='80' height='30' />");				
-				var formData = new FormData();		
-				for(var i=0;i<fileListSent.length;i++){
-					formData.append("upload",fileListSent[i]);
+	$("#uploadDiv").on('click','#uploadButton',function() {
+		$("#uploadTip").text("");
+		var overiddenFlag=$("input[name='overrideFile']:checked").val();
+		var fileInputList=$(".selectionExist");
+		var fileListSent=[];
+		for (var i=0;i<fileInputList.length;i++) {
+			if (fileInputList[i].files.length>0) {
+				if ($(fileInputList[i]).next().text()=="") {
+					$("#uploadTip").text("Validating files, wait a moment");
+					return;
 				}
-				$.ajax({
-					type:"post",
-					url:"/hibernarm-management/fileUpload.action",
-					data:formData,
-					dataType:"json",
-					processData: false,  // tell jQuery not to process the data
-					contentType: false,  // tell jQuery not to set contentType
-				    success:function(data,textStatus,jqXHR){
-                          if(data.uploadResult=="fail"){
-                        	  $("#uploadTip").text("upload files failes"+data.uploadResultDescription);
-                          }else if(data.uploadResult=="success"){
-                        	  $("#uploadTip").text("upload files success");
-                          }
-				    }
-				});
-				$("#files").html("<input type='file' name='upload' class='selectionExist'/>"+
-									"<span></span>"+
-									"<span></span>"+
-									"<br />"+ 
-									"<input type='file' name='upload' class='selectionExist' />"+
-									"<span></span>"+
-									"<span></span>"+
-									"<br />");
-			}else if(fileListSent.length==0){
-				 $("#uploadTip").text("there are no files needed to be uploaded");
+				if ($(fileInputList[i]).next().text()=="NONE") {
+					fileListSent.push(fileInputList[i].files[0]);
+				}
+				if ($(fileInputList[i]).next().text()=="CHANGED"&&overiddenFlag=="Y") {
+					fileListSent.push(fileInputList[i].files[0]);
+				}
 			}
-			
-		});
-
+		}
+		if (fileListSent.length>0) {
+			$("#uploadTip").html("<img src='image/progressbar.gif' width='80' height='30' style='vertical-align: middle;' />");
+			var formData = new FormData();
+			for (var i=0;i<fileListSent.length;i++) {
+				formData.append("upload",fileListSent[i]);
+			}
+			$.ajax({
+				type: "post",
+				url: "/hibernarm-management/fileUpload.action",
+				data: formData,
+				dataType: "json",
+				processData: false,  // tell jQuery not to process the data
+				contentType: false,  // tell jQuery not to set contentType
+				success: function(data,textStatus,jqXHR) {
+					if (data.uploadResult=="fail") {
+						$("#uploadTip").text("upload files failes: "+data.uploadResultDescription);
+					} else if (data.uploadResult=="success") {
+						$("#uploadTip").text("upload files success");
+					}
+				}
+			});
+			$("#files").html(fileUploadControlSourceCode+fileUploadControlSourceCode);
+		} else if (fileListSent.length==0) {
+			$("#uploadTip").text("there are no files needed to be uploaded");
+		}
+	});
 });

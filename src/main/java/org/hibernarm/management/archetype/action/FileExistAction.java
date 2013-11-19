@@ -13,7 +13,7 @@ import org.hibernarm.management.util.ArchetypeUtil;
 import org.hibernarm.management.util.FileUtil;
 import org.hibernarm.management.util.FileExistConstant;
 
-public class ExamExistAction {
+public class FileExistAction {
 	private String existStatus;
 	private String existName;
 	private File singleFile[];
@@ -90,7 +90,7 @@ public class ExamExistAction {
 	}
 
 	public static void setArmBeanDao(ARMBeanDao armBeanDao) {
-		ExamExistAction.armBeanDao = armBeanDao;
+		FileExistAction.armBeanDao = armBeanDao;
 	}
 
 	public static ArchetypeBeanDao getArchetypeBeanDao() {
@@ -98,7 +98,7 @@ public class ExamExistAction {
 	}
 
 	public static void setArchetypeBeanDao(ArchetypeBeanDao archetypeBeanDao) {
-		ExamExistAction.archetypeBeanDao = archetypeBeanDao;
+		FileExistAction.archetypeBeanDao = archetypeBeanDao;
 	}
 
 	public File[] getSingleFile() {

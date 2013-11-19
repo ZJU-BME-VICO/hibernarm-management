@@ -24,7 +24,7 @@
 }
 
 #searchSubmit {
-	width: 10%;
+/* 	width: 10%; */
 	vertical-align: middle;
 	height: 30px;
 	width: 30px;
@@ -88,9 +88,11 @@
 #addFile {
 	width: 40px;
 	height: 30px;
+	vertical-align: middle;
 }
 
 #uploadButton {
 	width: 40px;
 	height: 30px;
+	vertical-align: middle;
 }

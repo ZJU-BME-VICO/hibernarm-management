@@ -26,8 +26,8 @@
 		</action>
 	</package>
 	<package name="json" extends="json-default" namespace="/">
-		<action name="examExist"
-			class="org.hibernarm.management.archetype.action.ExamExistAction">
+		<action name="fileExist"
+			class="org.hibernarm.management.archetype.action.FileExistAction">
 			<result type="json">
 				<param name="existStatus">existStatus</param>
 				<param name="existName">existName</param>
