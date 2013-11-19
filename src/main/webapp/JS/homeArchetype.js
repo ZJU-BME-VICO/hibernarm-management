@@ -46,7 +46,7 @@ $(document).ready(function() {
                   }
 			}
 			if(fileListSent.length>0){
-				$("#uploadTip").html("<img src='image/progressbar.gif' width='40' height='30' />");				
+				$("#uploadTip").html("<img src='image/progressbar.gif' width='80' height='30' />");				
 				var formData = new FormData();		
 				for(var i=0;i<fileListSent.length;i++){
 					formData.append("upload",fileListSent[i]);

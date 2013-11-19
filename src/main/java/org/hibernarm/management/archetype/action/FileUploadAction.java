@@ -108,13 +108,14 @@ public class FileUploadAction {
 
 	private static List<ARMBean> constructArmBeans(File[] upload,
 			String[] uploadFileName, String[] uploadContentType,
-			Date modifyTime, CommitSequence version) {
+			Date modifyTime, CommitSequence version) throws Exception {
 		List<ARMBean> list = new ArrayList<ARMBean>();
 		for (int i = 0; i < uploadFileName.length; i++) {
 			if (FileUtil.getFileType(upload[i]).compareToIgnoreCase("xml") == 0) {
 				ARMUtil armUtil = new ARMUtil(upload[i]);
 				String archetypeId = armUtil.getArchetypeId();
-				String armContent = armUtil.getARMContent();
+//				String armContent = armUtil.getARMContent();
+				String armContent = FileUtil.extractContent(upload[i]);
 				if (!archetypeId.isEmpty() && !armContent.isEmpty()) {
 					ARMBean armBean = new ARMBean();
 					armBean.setContent(armContent);
