@@ -9,6 +9,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springframework.version>3.2.2.RELEASE</springframework.version>
 		<hibernate.version>4.2.7.Final</hibernate.version>
 		<cxf.version>2.7.6</cxf.version>
@@ -53,6 +54,19 @@
 	</profiles>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
