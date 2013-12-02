@@ -5,15 +5,15 @@
 	<package name="home" extends="struts-default" namespace="/">
 		<action name="homeArchetype"
 			class="org.hibernarm.management.archetype.action.HomeArchetypeAction">
-			<result name="success">homeArchetypeBootStrapVersion.jsp</result>
+			<result name="success">homeArchetype.jsp</result>
 		</action>
 		<action name="searchArchetype"
 			class="org.hibernarm.management.archetype.action.SearchArchetypeAction">
-			<result name="success">searchArchetypeBootStrapVersion.jsp</result>
+			<result name="success">searchArchetype.jsp</result>
 		</action>
 		<action name="displayContent"
 			class="org.hibernarm.management.archetype.action.DisplayContentAction">
-			<result name="success">displayContentBootStrapVersion.jsp</result>
+			<result name="success">displayContent.jsp</result>
 		</action>
 		<action name="fileDownload"
 			class="org.hibernarm.management.archetype.action.FileDownloadAction">

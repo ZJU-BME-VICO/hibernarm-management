@@ -1,60 +1,111 @@
 <%@ page pageEncoding="utf-8"%>
 <%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html>
-<!--<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">-->
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<link rel=stylesheet type="text/css" href="CSS/homeArchetype.css">
-		<script src="JS/jquery-2.0.3.js"></script>
-		<script type="text/javascript" src="JS/homeArchetype.js"></script>
-	</head>
-	<body>
-	<div id="wrap">
-	    <div id="header">
-	    </div>
-	    <div id="mainContent">
-	        <div id="pictureFlag">
-	             <div id="pictureFlagTakeFirst"></div>
-	             <div id="mainPictureFlag"></div>
-	             <div id="pictureFlagTakeSecond"></div>            
-	        </div>
-			<div id="searchDiv">
-				<form method="post" action="/hibernarm-management/searchArchetype.action">
-				<div id="searchBorderDiv">
-					<input id="searchInput" type="text" name="condition"></input> 
-					<input id="searchSubmit" type="image" src="image/search.png" alt="Submit"></input>
-				</div>
-				</form>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootstrap 101 Template</title>
+<!-- 最新 Bootstrap 核心 CSS 文件 -->
+<!-- 最新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet"
+	href="/hibernarm-management/CSS/bootstrap.min.css">
+<script src="/hibernarm-management/JS/jquery-2.0.3.min.js"></script>
+<script src="/hibernarm-management/JS/homeArchetypeBootStrapVersion.js"></script>
+<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+<link rel="stylesheet"
+	href="/hibernarm-management/CSS/bootstrap-theme.min.css">
+<link rel="stylesheet"
+	href="/hibernarm-management/CSS/blueimp-gallery.min.css">
+<link rel="stylesheet"
+	href="/hibernarm-management/CSS/jquery.fileupload.css">
+<link rel="stylesheet"
+	href="/hibernarm-management/CSS/jquery.fileupload-ui.css">
+<link rel="stylesheet"
+	href="/hibernarm-management/CSS/bootstrap-switch.min.css">
+<link rel="stylesheet"
+	href="/hibernarm-management/CSS/flat-ui-fonts.min.css">
+<link rel="stylesheet"
+	href="/hibernarm-management/CSS/homeArchetypeBootStrapVersion.css">
+<script src="/hibernarm-management/JS/bootstrap.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="/hibernarm-management/JS/bootstrap-switch.min.js"></script>
+<script type="text/javascript"
+	src="/hibernarm-management/JS/noty/jquery.noty.min.js"></script>
+
+<script type="text/javascript"
+	src="/hibernarm-management/JS/noty/layouts/bottomRight.min.js"></script>
+<script type="text/javascript"
+	src="/hibernarm-management/JS/noty/themes/default.min.js"></script>
+
+</head>
+<body>
+	<div class="container" id="wholeContainer">
+		<div class="row">
+			<div class="col-xs-12 col-md-12 col-lg-12">
+				<ul class="nav nav-tabs">
+					<li class="active"><a
+						href="#">Home</a></li>
+					<li><a href="/hibernarm-management/searchArchetype?condition=">SearchDis</a></li>
+					<li><a href="#">Messages</a></li>
+				</ul>
 			</div>
-			<div id="uploadDistrict">
-			<div id="uploadDistrictTakenFirt"></div>
-			<div id="uploadDistrictTakenSecond"></div>
-			<div id="uploadDiv">
-				<input type="image" src="image/AddFile.png" id="addFile" />
-				Override changed?
-				<input type="radio" name="overrideFile" value="Y" />Y
-				<input type="radio" name="overrideFile" value="N" checked="checked" />N
-				<input type="image" src="image/upload.jpg" id="uploadButton"/>
-				<span id="uploadTip"></span>
-				<form onsubmit="return false;"
-					action="/hibernarm-management/fileUpload.action" method="post"
-					enctype="multipart/form-data" id="uploadDomain">
-					<span id="files"> 
-						<input type='file' name='upload' class="selectionExist"/>
-						<span></span>
-						<span></span>
-						<br /> 
-						<input type='file' name='upload' class="selectionExist" />
-						<span></span>
-						<span></span>
-						<br />
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-xs-8 col-xs-offset-2 col-md-offset-2 col-lg-8 col-lg-offset-2"
+				>
+				<img src="/hibernarm-management/image/be.jpg" class="img-responsive"
+					alt="Responsive image">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-xs-8 col-xs-offset-2 col-md-offset-2 col-lg-8 col-lg-offset-2"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-xs-8 col-xs-offset-2 col-md-offset-2 col-lg-8 col-lg-offset-2"
+				id="searchDiv">
+				<div class="input-group">
+					<input type="text" class="form-control" id="searchConditionInput">
+					<span class="input-group-btn">
+						<button class="btn btn-primary" type="button" id="searchButton">
+							<i class="glyphicon glyphicon-search"></i>
+						</button>
 					</span>
-					<br/>			
-				</form>
-			</div>			
+				</div>
 			</div>
-	  </div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-xs-8 col-xs-offset-2 col-md-offset-2 col-lg-8 col-lg-offset-2"
+				id="addFileDiv">
+
+				<!-- The fileinput-button span is used to style the file input field as button -->
+				<span class="btn btn-success fileinput-button" id="addFiles">
+					<i class="glyphicon glyphicon-plus"></i> <span>Add files...</span>
+					<input id="inputFiles" type="file" name="files[]" multiple>
+				</span>
+				<button type="submit" class="btn btn-primary start" id="uploadFlag">
+					<i class="glyphicon glyphicon-upload"></i> <span>Start
+						upload</span>
+				</button>
+				<span id="uploadTip"></span>
+				<div id="overrideChangedRadio" class="pull-right">
+					<label class="label-change-switch"> Override Changed
+						<div class="make-switch">
+							<input type="checkbox" />
+						</div>
+					</label>
+				</div>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-xs-8 col-xs-offset-2 col-md-offset-2 col-lg-8 col-lg-offset-2">
+				<table role="presentation" class="table table-striped">
+					<tbody class="files" id="displayFiles">
+
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
-	</body>
+</body>
 </html>
