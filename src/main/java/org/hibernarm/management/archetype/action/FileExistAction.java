@@ -17,12 +17,14 @@ public class FileExistAction {
 	private String existStatus;
 	private String existName;
 	private File singleFile[];
+	private String singleFileFileName[];
+	private String originalFileName;
 	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
 	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
 
 	public String execute() {
 		String result = "success";
-
+		originalFileName=singleFileFileName[0];
 		if (FileUtil.getFileType(singleFile[0]).compareToIgnoreCase("adl") == 0) {
 			ArchetypeUtil archetypeUtil = new ArchetypeUtil(singleFile[0]);
 			String archetypeId = archetypeUtil.getArchetypeId();
@@ -108,5 +110,22 @@ public class FileExistAction {
 	public void setSingleFile(File[] singleFile) {
 		this.singleFile = singleFile;
 	}
+
+	public String[] getSingleFileFileName() {
+		return singleFileFileName;
+	}
+
+	public void setSingleFileFileName(String[] singleFileFileName) {
+		this.singleFileFileName = singleFileFileName;
+	}
+
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
+	
 
 }

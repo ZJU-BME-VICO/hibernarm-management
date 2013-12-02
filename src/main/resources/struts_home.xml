@@ -5,15 +5,15 @@
 	<package name="home" extends="struts-default" namespace="/">
 		<action name="homeArchetype"
 			class="org.hibernarm.management.archetype.action.HomeArchetypeAction">
-			<result name="success">homeArchetype.jsp</result>
+			<result name="success">homeArchetypeBootStrapVersion.jsp</result>
 		</action>
 		<action name="searchArchetype"
 			class="org.hibernarm.management.archetype.action.SearchArchetypeAction">
-			<result name="success">searchArchetype.jsp</result>
+			<result name="success">searchArchetypeBootStrapVersion.jsp</result>
 		</action>
 		<action name="displayContent"
 			class="org.hibernarm.management.archetype.action.DisplayContentAction">
-			<result name="success">displayContent.jsp</result>
+			<result name="success">displayContentBootStrapVersion.jsp</result>
 		</action>
 		<action name="fileDownload"
 			class="org.hibernarm.management.archetype.action.FileDownloadAction">
@@ -31,6 +31,7 @@
 			<result type="json">
 				<param name="existStatus">existStatus</param>
 				<param name="existName">existName</param>
+				<param name="originalFileName">originalFileName</param>
 			</result>
 		</action>
 		<action name="fileUpload"
