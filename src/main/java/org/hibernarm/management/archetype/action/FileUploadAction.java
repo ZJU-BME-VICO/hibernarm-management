@@ -92,12 +92,14 @@ public class FileUploadAction {
 			if (FileUtil.getFileType(upload[i]).compareToIgnoreCase("adl") == 0) {
 				ArchetypeUtil archetypeUtil = new ArchetypeUtil(upload[i]);
 				String archetypeId = archetypeUtil.getArchetypeId();
+				String archetypeDescription = archetypeUtil.getArchetypeDescription();
 				String archetypeContent = archetypeUtil.getArchetypeContent();
 				if (!archetypeId.isEmpty() && !archetypeContent.isEmpty()) {
 					ArchetypeBean archetypeBean = new ArchetypeBean();
 					archetypeBean.setModifyTime(modifyTime);
 					archetypeBean.setContent(archetypeContent);
 					archetypeBean.setName(archetypeId);
+					archetypeBean.setDescription(archetypeDescription);
 					archetypeBean.setCommitSequence(version);
 					list.add(archetypeBean);
 				}

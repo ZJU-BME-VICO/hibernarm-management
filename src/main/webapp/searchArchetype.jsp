@@ -13,6 +13,7 @@
 	href="/hibernarm-management/CSS/bootstrap-theme.min.css">
 <script src="/hibernarm-management/JS/jquery-2.0.3.min.js"></script>
 <script src="/hibernarm-management/JS/bootstrap.min.js"></script>
+<script src="/hibernarm-management/JS/searchArchetype.js"></script>
 </head>
 <body>
 	<div class="container" id="wholeContainer">
@@ -51,26 +52,15 @@
 							<div class="panel-heading">
 								<h4 class="panel-title">
 									<a data-toggle="collapse" data-toggle="collapse"
-										data-parent="#accordion" href="#<s:property value="name" />"><s:property
-											value="name" /> </a>
-
+										data-parent="#accordion" href="#<s:property value="name" />">
+										<s:property	value="name" /></a>
 								</h4>
 								<a
 									href="/hibernarm-management/displayContent.action?keyName=<s:property value="name"/>">浏览</a>
 							</div>
 							<div id="<s:property value="name" />"
 								class="panel-collapse collapse in">
-								<div class="panel-body">Anim pariatur cliche
-									reprehenderit, enim eiusmod high life accusamus terry
-									richardson ad squid. 3 wolf moon officia aute, non cupidatat
-									skateboard dolor brunch. Food truck quinoa nesciunt laborum
-									eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on
-									it squid single-origin coffee nulla assumenda shoreditch et.
-									Nihil anim keffiyeh helvetica, craft beer labore wes anderson
-									cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-									vice lomo. Leggings occaecat craft beer farm-to-table, raw
-									denim aesthetic synth nesciunt you probably haven't heard of
-									them accusamus labore sustainable VHS.</div>
+								<div id="descriptionDiv" class="panel-body"><s:property value="description" /></div>
 							</div>
 						</div>
 					</s:iterator>
