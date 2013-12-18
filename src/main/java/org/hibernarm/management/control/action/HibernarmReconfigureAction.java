@@ -1,30 +1,19 @@
 package org.hibernarm.management.control.action;
 
-import java.util.List;
-
 import org.hibernarm.service.AQLExecute;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class HibernarmControlAction {
-	private List<String> archetypeIdList;
-	
+public class HibernarmReconfigureAction {	
 	public String execute() {
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"applicationContext.xml", HibernarmControlAction.class);
+				"applicationContext.xml", HibernarmReconfigureAction.class);
 		AQLExecute client = (AQLExecute) context.getBean("wsclient");
-		
-		setArchetypeIdList(client.getArchetypeIds());
+
+		HibernarmControl control = new HibernarmControl();
+		control.execute(client);
 
 		return "success";
-	}
-
-	public List<String> getArchetypeIdList() {
-		return archetypeIdList;
-	}
-
-	public void setArchetypeIdList(List<String> archetypeIdList) {
-		this.archetypeIdList = archetypeIdList;
 	}
 }
