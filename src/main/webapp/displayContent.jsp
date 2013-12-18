@@ -9,7 +9,7 @@
 <link rel="stylesheet"
 	href="/hibernarm-management/CSS/bootstrap.min.css">
 <link rel="stylesheet"
-	href="/hibernarm-management/CSS/searchArchetypeBootStrapVersion.css">
+	href="/hibernarm-management/CSS/searchArchetype.css">
 <link rel="stylesheet"
 	href="/hibernarm-management/CSS/bootstrap-theme.min.css">
 <link rel="stylesheet" href="/hibernarm-management/CSS/prettify.css">
@@ -26,7 +26,7 @@
 					<li><a
 						href="/hibernarm-management/homeArchetype">Home</a></li>
 					<li><a href="/hibernarm-management/searchArchetype?condition=">SearchDis</a></li>
-					<li class="active">Messages</li>
+					<li class="active"><a href="#">Messages</a></li>
 				</ul>
 			</div>
 		</div>

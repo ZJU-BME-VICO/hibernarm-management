@@ -8,7 +8,7 @@
 <link rel="stylesheet"
 	href="/hibernarm-management/CSS/bootstrap.min.css">
 <link rel="stylesheet"
-	href="/hibernarm-management/CSS/searchArchetypeBootStrapVersion.css">
+	href="/hibernarm-management/CSS/searchArchetype.css">
 <link rel="stylesheet"
 	href="/hibernarm-management/CSS/bootstrap-theme.min.css">
 <script src="/hibernarm-management/JS/jquery-2.0.3.min.js"></script>

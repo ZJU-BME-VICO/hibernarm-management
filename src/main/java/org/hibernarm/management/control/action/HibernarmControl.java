@@ -1,5 +1,6 @@
 package org.hibernarm.management.control.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernarm.management.dao.impl.ARMBeanDaoHibernateImpl;
@@ -17,24 +18,15 @@ public class HibernarmControl {
 		List<ArchetypeBean> archetypes = archetypeBeanDao.selectAll();
 		List<ARMBean> arms = armBeanDao.selectAll();
 		client.stop();
+		List<String> archetypesStrings = new ArrayList<String>();
 		for (ArchetypeBean archetype : archetypes) {
-			ARMBean arm = getArm(archetype.getName(), arms);
-			if (arm != null) {
-				client.registerArchetype(archetype.getName(),
-						archetype.getContent(), arm.getContent());
-			}
+			archetypesStrings.add(archetype.getContent());
 		}
-		client.reconfigure();
-		client.start();
-	}
-
-	protected ARMBean getArm(String archetypeId, List<ARMBean> arms) {
+		List<String> armStrings = new ArrayList<String>();
 		for (ARMBean arm : arms) {
-			if (arm.getName().compareTo(archetypeId) == 0) {
-				return arm;
-			}
+			armStrings.add(arm.getContent());
 		}
-
-		return null;
+		client.reconfigure(archetypesStrings, armStrings);
+		client.start();
 	}
 }

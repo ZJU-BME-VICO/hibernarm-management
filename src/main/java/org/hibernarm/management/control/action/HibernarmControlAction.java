@@ -1,10 +1,14 @@
 package org.hibernarm.management.control.action;
 
+import java.util.List;
+
 import org.hibernarm.service.AQLExecute;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class HibernarmControlAction {
+	private List<String> archetypeIdList;
+	
 	public String execute() {
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext(
@@ -13,7 +17,17 @@ public class HibernarmControlAction {
 
 		HibernarmControl control = new HibernarmControl();
 		control.execute(client);
+		
+		setArchetypeIdList(client.getArchetypeIds());
 
 		return "success";
+	}
+
+	public List<String> getArchetypeIdList() {
+		return archetypeIdList;
+	}
+
+	public void setArchetypeIdList(List<String> archetypeIdList) {
+		this.archetypeIdList = archetypeIdList;
 	}
 }

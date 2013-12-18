@@ -25,7 +25,7 @@
 <link rel="stylesheet"
 	href="/hibernarm-management/CSS/flat-ui-fonts.min.css">
 <link rel="stylesheet"
-	href="/hibernarm-management/CSS/homeArchetypeBootStrapVersion.css">
+	href="/hibernarm-management/CSS/homeArchetype.css">
 <script src="/hibernarm-management/JS/bootstrap.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="/hibernarm-management/JS/bootstrap-switch.min.js"></script>
