@@ -13,6 +13,7 @@
 	href="/hibernarm-management/CSS/bootstrap-theme.min.css">
 <script src="/hibernarm-management/JS/jquery-2.0.3.min.js"></script>
 <script src="/hibernarm-management/JS/bootstrap.min.js"></script>
+<script src="/hibernarm-management/JS/hibernarmControl.js"></script>
 </head>
 <body>
 	<div class="container" id="wholeContainer">
@@ -20,10 +21,8 @@
 			<div class="col-md-8 col-xs-8 col-xs-offset-2 col-md-offset-2"
 				id="searchDiv">
 				<div class="input-group">
-					<form method="post"
-						action="/hibernarm-management/hibernarmControl.action">
-						<input type="submit" value="Restart">
-					</form>
+					<button class="btn btn-primary" type="button" id="searchButton">Restart
+					</button>
 				</div>
 			</div>
 		</div>

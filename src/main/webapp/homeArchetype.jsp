@@ -10,7 +10,7 @@
 <link rel="stylesheet"
 	href="/hibernarm-management/CSS/bootstrap.min.css">
 <script src="/hibernarm-management/JS/jquery-2.0.3.min.js"></script>
-<script src="/hibernarm-management/JS/homeArchetypeBootStrapVersion.js"></script>
+<script src="/hibernarm-management/JS/homeArchetype.js"></script>
 <!-- 可选的Bootstrap主题文件（一般不用引入） -->
 <link rel="stylesheet"
 	href="/hibernarm-management/CSS/bootstrap-theme.min.css">

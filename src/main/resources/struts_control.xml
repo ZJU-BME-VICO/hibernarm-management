@@ -3,10 +3,6 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<package name="control" extends="struts-default" namespace="/">
-		<action name="homeControl"
-			class="org.hibernarm.management.control.action.HomeControlAction">
-			<result name="success">hibernarmControl.jsp</result>
-		</action>
 		<action name="hibernarmControl"
 			class="org.hibernarm.management.control.action.HibernarmControlAction">
 			<result name="success">hibernarmControl.jsp</result>
