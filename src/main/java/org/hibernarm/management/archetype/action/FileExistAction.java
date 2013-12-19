@@ -2,6 +2,7 @@ package org.hibernarm.management.archetype.action;
 
 import java.io.File;
 
+import org.apache.log4j.Logger;
 import org.hibernarm.management.dao.impl.ARMBeanDaoHibernateImpl;
 import org.hibernarm.management.dao.impl.ArchetypeBeanDaoHibernateImpl;
 import org.hibernarm.management.dao.virtual.ARMBeanDao;
@@ -14,6 +15,9 @@ import org.hibernarm.management.util.FileUtil;
 import org.hibernarm.management.util.FileExistConstant;
 
 public class FileExistAction {
+	private static Logger logger = Logger.getLogger(FileExistAction.class
+			.getName());
+	
 	private String existStatus;
 	private String existName;
 	private File singleFile[];
@@ -24,7 +28,8 @@ public class FileExistAction {
 
 	public String execute() {
 		String result = "success";
-		originalFileName=singleFileFileName[0];
+		logger.info(singleFile[0].getPath() + " size: " + singleFile[0].length());
+		originalFileName = singleFileFileName[0];
 		if (FileUtil.getFileType(singleFile[0]).compareToIgnoreCase("adl") == 0) {
 			ArchetypeUtil archetypeUtil = new ArchetypeUtil(singleFile[0]);
 			String archetypeId = archetypeUtil.getArchetypeId();

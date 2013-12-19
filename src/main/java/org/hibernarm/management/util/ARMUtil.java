@@ -16,6 +16,7 @@ public class ARMUtil {
 	public ARMUtil(File armFile) {
 		try {
 			SAXReader saxReader = new SAXReader();
+			saxReader.setEntityResolver(new IgnoreDTDEntityResolver()); 
 			doc = saxReader.read(armFile);
 			Attribute classNode = (Attribute) doc.selectSingleNode("/hibernate-mapping/class/@name");
 			archetypeId = classNode.getText();			

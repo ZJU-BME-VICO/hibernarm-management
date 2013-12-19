@@ -34,9 +34,6 @@ public class ARMBeanDaoHibernateImpl implements ARMBeanDao {
 				.createQuery("from ARMBean as arm where arm.name=:conditionname");
 		query.setString("conditionname", name);
 		ARMBean armBean = (ARMBean) query.uniqueResult();
-		if (armBean != null) {
-			session.evict(armBean);
-		}
 		return armBean;
 	}
 
