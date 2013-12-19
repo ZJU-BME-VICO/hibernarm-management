@@ -6,4 +6,9 @@ $(document).ready(function() {
 			$(this).html(strDescriptionReplaced);			
 		}
 	});
+	$('#searchTopDiv').on('click','#searchButton',function(){
+		var valueCondition=$('#searchConditionInput').val();
+		window.location.href="/hibernarm-management/searchArchetype.action?condition="+valueCondition;
+		
+	});
 });
