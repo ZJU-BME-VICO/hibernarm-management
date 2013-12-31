@@ -25,11 +25,12 @@ import org.hibernarm.management.util.ArchetypeUtil;
 import org.hibernarm.management.util.CommitSequenceConstant;
 import org.hibernarm.management.util.FileUtil;
 import org.hibernarm.management.util.HibernateUtil;
-import org.hibernarm.service.AQLExecute;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import edu.zju.bme.hibernarm.service.AQLExecute;
 
 public class FileUploadAction {
 	private static Logger logger = Logger.getLogger(FileUploadAction.class

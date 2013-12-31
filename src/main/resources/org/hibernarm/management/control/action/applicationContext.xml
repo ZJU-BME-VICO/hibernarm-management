@@ -15,17 +15,17 @@
       http://cxf.apache.org/jaxws    
       http://cxf.apache.org/schemas/jaxws.xsd">
     
-    <bean id="wsclient" class="org.hibernarm.service.AQLExecute" factory-bean="wsclientFactory" factory-method="create" />   
+    <bean id="wsclient" class="edu.zju.bme.hibernarm.service.AQLExecute" factory-bean="wsclientFactory" factory-method="create" />   
            
     <bean id="wsclientFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">   
-        <property name="serviceClass" value="org.hibernarm.service.AQLExecute" />   
+        <property name="serviceClass" value="edu.zju.bme.hibernarm.service.AQLExecute" />   
         <property name="address" value="${hibernarm.service.AQLExecute.url}" />       
     </bean>
     
-    <bean id="wsclientvalidation" class="org.hibernarm.service.AQLExecute" factory-bean="wsclientvalidationFactory" factory-method="create" />   
+    <bean id="wsclientvalidation" class="edu.zju.bme.hibernarm.service.AQLExecute" factory-bean="wsclientvalidationFactory" factory-method="create" />   
            
     <bean id="wsclientvalidationFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">   
-        <property name="serviceClass" value="org.hibernarm.service.AQLExecute" />   
+        <property name="serviceClass" value="edu.zju.bme.hibernarm.service.AQLExecute" />   
         <property name="address" value="${hibernarm.validation.AQLExecute.url}" />       
     </bean>
         

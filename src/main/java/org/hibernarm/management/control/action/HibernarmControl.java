@@ -9,7 +9,8 @@ import org.hibernarm.management.dao.virtual.ARMBeanDao;
 import org.hibernarm.management.dao.virtual.ArchetypeBeanDao;
 import org.hibernarm.management.model.ARMBean;
 import org.hibernarm.management.model.ArchetypeBean;
-import org.hibernarm.service.AQLExecute;
+
+import edu.zju.bme.hibernarm.service.AQLExecute;
 
 public class HibernarmControl {
 	public void execute(AQLExecute client) {
