@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bootstrap 101 Template</title>
+<title></title>
 <!-- 最新 Bootstrap 核心 CSS 文件 -->
 <!-- 最新 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet"
