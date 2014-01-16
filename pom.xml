@@ -14,7 +14,7 @@
 		<hibernate.version>4.2.7.Final</hibernate.version>
 		<cxf.version>2.7.6</cxf.version>
 		<tomcat.port>9092</tomcat.port>
-		<openEHR.version>1.0.5-SNAPSHOT</openEHR.version>
+		<openEHR.version>1.0.5.1</openEHR.version>
 	</properties>
 
 	<profiles>
