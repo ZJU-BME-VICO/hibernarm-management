@@ -23,7 +23,7 @@
 			<properties>
 				<env>dev</env>
 				<tomcat.url>http://localhost:${tomcat.port}/manager/text</tomcat.url>
-				<database.url>jdbc:sqlserver://localhost:1433;DatabaseName=hibernarm-management</database.url>
+				<database.url>jdbc:sqlserver://wl-pc:1433;DatabaseName=hibernarm-management-dev</database.url>
 				<database.username>sa</database.username>
 				<database.password>sa</database.password>
 				<hibernarm.service.AQLExecute.url>http://localhost:9091/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
