@@ -4,19 +4,19 @@
 <struts>
 	<package name="home" extends="struts-default" namespace="/">
 		<action name="homeArchetype"
-			class="org.hibernarm.management.archetype.action.HomeArchetypeAction">
+			class="edu.zju.bme.hibernarm.management.archetype.action.HomeArchetypeAction">
 			<result name="success">homeArchetype.jsp</result>
 		</action>
 		<action name="searchArchetype"
-			class="org.hibernarm.management.archetype.action.SearchArchetypeAction">
+			class="edu.zju.bme.hibernarm.management.archetype.action.SearchArchetypeAction">
 			<result name="success">searchArchetype.jsp</result>
 		</action>
 		<action name="displayContent"
-			class="org.hibernarm.management.archetype.action.DisplayContentAction">
+			class="edu.zju.bme.hibernarm.management.archetype.action.DisplayContentAction">
 			<result name="success">displayContent.jsp</result>
 		</action>
 		<action name="fileDownload"
-			class="org.hibernarm.management.archetype.action.FileDownloadAction">
+			class="edu.zju.bme.hibernarm.management.archetype.action.FileDownloadAction">
 			<result name="success" type="stream">
 				<param name="contentType">text/plain</param>
 				<param name="inputName">inputStream</param>
@@ -25,13 +25,13 @@
 			</result>
 		</action>
 		<action name="hibernarmControl"
-			class="org.hibernarm.management.control.action.HibernarmControlAction">
+			class="edu.zju.bme.hibernarm.management.control.action.HibernarmControlAction">
 			<result name="success">hibernarmControl.jsp</result>
 		</action>
 	</package>
 	<package name="json" extends="json-default" namespace="/">
 		<action name="fileExist"
-			class="org.hibernarm.management.archetype.action.FileExistAction">
+			class="edu.zju.bme.hibernarm.management.archetype.action.FileExistAction">
 			<result type="json">
 				<param name="existStatus">existStatus</param>
 				<param name="existName">existName</param>
@@ -39,14 +39,14 @@
 			</result>
 		</action>
 		<action name="fileUpload"
-			class="org.hibernarm.management.archetype.action.FileUploadAction">
+			class="edu.zju.bme.hibernarm.management.archetype.action.FileUploadAction">
 			<result type="json">
 				<param name="uploadResult">uploadResult</param>
 				<param name="uploadResultDescription">uploadResultDescription</param>
 			</result>
 		</action>
 		<action name="hibernarmReconfigure"
-			class="org.hibernarm.management.control.action.HibernarmReconfigureAction">
+			class="edu.zju.bme.hibernarm.management.control.action.HibernarmReconfigureAction">
 			<result type="json">
 			</result>
 		</action>

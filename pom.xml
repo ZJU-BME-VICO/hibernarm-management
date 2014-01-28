@@ -1,12 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project 
+	xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://maven.apache.org/POM/4.0.0 
+		http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.hibernarm</groupId>
+	<groupId>edu.zju.bme</groupId>
 	<artifactId>hibernarm-management</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hibernarm-management Maven Webapp</name>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,7 +26,7 @@
 			<properties>
 				<env>dev</env>
 				<tomcat.url>http://localhost:${tomcat.port}/manager/text</tomcat.url>
-				<database.url>jdbc:sqlserver://wl-pc:1433;DatabaseName=hibernarm-management-dev</database.url>
+				<database.url>jdbc:sqlserver://localhost:1433;DatabaseName=hibernarm-management-dev</database.url>
 				<database.username>sa</database.username>
 				<database.password>sa</database.password>
 				<hibernarm.service.AQLExecute.url>http://localhost:9091/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
@@ -76,8 +79,8 @@
 					<username>admin</username>
 					<password>admin</password>
 					<path>/hibernarm-management</path>
-					<charset>utf-8</charset>
-					<uriEncoding>utf-8</uriEncoding>
+					<charset>${project.build.sourceEncoding}</charset>
+					<uriEncoding>${project.build.sourceEncoding}</uriEncoding>
 					<port>${tomcat.port}</port>
 				</configuration>
 			</plugin>
@@ -202,6 +205,16 @@
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
 			<version>1.1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.zju.bme</groupId>
+			<artifactId>snippet-java</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>4.0</version>
 		</dependency>
 	</dependencies>
 </project>
