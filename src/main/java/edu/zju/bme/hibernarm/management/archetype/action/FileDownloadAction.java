@@ -6,10 +6,10 @@ import java.io.UnsupportedEncodingException;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import edu.zju.bme.hibernarm.management.dao.impl.ARMBeanDaoHibernateImpl;
-import edu.zju.bme.hibernarm.management.dao.impl.ArchetypeBeanDaoHibernateImpl;
-import edu.zju.bme.hibernarm.management.dao.virtual.ARMBeanDao;
-import edu.zju.bme.hibernarm.management.dao.virtual.ArchetypeBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ARMBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ARMBeanDaoImpl;
+import edu.zju.bme.hibernarm.management.dao.ArchetypeBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ArchetypeBeanDaoImpl;
 import edu.zju.bme.hibernarm.management.model.ARMBean;
 import edu.zju.bme.hibernarm.management.model.ArchetypeBean;
 
@@ -18,8 +18,8 @@ public class FileDownloadAction extends ActionSupport {
 
 	private String fileType;
 	private String keyName;
-	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
-	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
+	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoImpl();
+	private static ARMBeanDao armBeanDao = new ARMBeanDaoImpl();
 
 	public String getFileType() {
 		return fileType;

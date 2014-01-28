@@ -1,4 +1,4 @@
-package edu.zju.bme.hibernarm.management.dao.virtual;
+package edu.zju.bme.hibernarm.management.dao;
 
 import java.util.List;
 

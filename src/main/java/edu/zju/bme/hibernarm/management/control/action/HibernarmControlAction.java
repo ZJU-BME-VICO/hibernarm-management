@@ -13,7 +13,7 @@ public class HibernarmControlAction {
 	public String execute() {
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"applicationContext.xml", HibernarmControlAction.class);
+				"/beans.xml", HibernarmControlAction.class);
 		AQLExecute client = (AQLExecute) context.getBean("wsclient");
 		
 		setArchetypeIdList(client.getArchetypeIds());

@@ -1,17 +1,16 @@
-package edu.zju.bme.hibernarm.management.dao.impl;
+package edu.zju.bme.hibernarm.management.dao;
 
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-
-import edu.zju.bme.hibernarm.management.dao.virtual.ArchetypeBeanDao;
 import edu.zju.bme.hibernarm.management.model.ArchetypeBean;
 import edu.zju.bme.hibernarm.management.model.HistoriedArchetypeBean;
 import edu.zju.bme.hibernarm.management.util.CommitSequenceConstant;
 import edu.zju.bme.hibernarm.management.util.HibernateUtil;
 
-public class ArchetypeBeanDaoHibernateImpl implements ArchetypeBeanDao {
+public class ArchetypeBeanDaoImpl implements ArchetypeBeanDao {
+	
 	public List<ArchetypeBean> matchProbableByName(String name) {
 		Session session = HibernateUtil.currentSession();
 		Query query = session

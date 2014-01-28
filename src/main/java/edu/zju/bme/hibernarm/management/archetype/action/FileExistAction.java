@@ -4,10 +4,10 @@ import java.io.File;
 
 import org.apache.log4j.Logger;
 
-import edu.zju.bme.hibernarm.management.dao.impl.ARMBeanDaoHibernateImpl;
-import edu.zju.bme.hibernarm.management.dao.impl.ArchetypeBeanDaoHibernateImpl;
-import edu.zju.bme.hibernarm.management.dao.virtual.ARMBeanDao;
-import edu.zju.bme.hibernarm.management.dao.virtual.ArchetypeBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ARMBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ARMBeanDaoImpl;
+import edu.zju.bme.hibernarm.management.dao.ArchetypeBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ArchetypeBeanDaoImpl;
 import edu.zju.bme.hibernarm.management.model.ARMBean;
 import edu.zju.bme.hibernarm.management.model.ArchetypeBean;
 import edu.zju.bme.hibernarm.management.util.ARMUtil;
@@ -24,8 +24,8 @@ public class FileExistAction {
 	private File singleFile[];
 	private String singleFileFileName[];
 	private String originalFileName;
-	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
-	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
+	private static ARMBeanDao armBeanDao = new ARMBeanDaoImpl();
+	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoImpl();
 
 	public String execute() {
 		String result = "success";

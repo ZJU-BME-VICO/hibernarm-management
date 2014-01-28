@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE web-app PUBLIC
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
 <web-app>
-<!-- 	<context-param> -->
-<!-- 		<param-name>contextConfigLocation</param-name> -->
-<!-- 		<param-value>classpath:beans.xml</param-value> -->
-<!-- 	</context-param> -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:beans.xml</param-value>
+	</context-param>
 	<filter>
 		<filter-name>Struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
-	</filter>	
+	</filter>
 	<filter-mapping>
 		<filter-name>Struts2</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-<!-- 	<listener> -->
-<!-- 		<listener-class> -->
-<!-- 			org.springframework.web.context.ContextLoaderListener -->
-<!-- 		</listener-class> -->
-<!-- 	</listener> -->
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
 	<servlet>
 		<servlet-name>log4j-init</servlet-name>
 		<servlet-class>edu.zju.bme.snippet.java.Log4jInit</servlet-class>

@@ -3,18 +3,18 @@ package edu.zju.bme.hibernarm.management.control.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.zju.bme.hibernarm.management.dao.impl.ARMBeanDaoHibernateImpl;
-import edu.zju.bme.hibernarm.management.dao.impl.ArchetypeBeanDaoHibernateImpl;
-import edu.zju.bme.hibernarm.management.dao.virtual.ARMBeanDao;
-import edu.zju.bme.hibernarm.management.dao.virtual.ArchetypeBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ARMBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ARMBeanDaoImpl;
+import edu.zju.bme.hibernarm.management.dao.ArchetypeBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ArchetypeBeanDaoImpl;
 import edu.zju.bme.hibernarm.management.model.ARMBean;
 import edu.zju.bme.hibernarm.management.model.ArchetypeBean;
 import edu.zju.bme.hibernarm.service.AQLExecute;
 
 public class HibernarmControl {
 	public void execute(AQLExecute client) {
-		ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
-		ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
+		ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoImpl();
+		ARMBeanDao armBeanDao = new ARMBeanDaoImpl();
 		List<ArchetypeBean> archetypes = archetypeBeanDao.selectAll();
 		List<ARMBean> arms = armBeanDao.selectAll();
 		client.stop();

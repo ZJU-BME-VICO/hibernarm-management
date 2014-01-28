@@ -1,9 +1,9 @@
 package edu.zju.bme.hibernarm.management.archetype.action;
 
-import edu.zju.bme.hibernarm.management.dao.impl.ARMBeanDaoHibernateImpl;
-import edu.zju.bme.hibernarm.management.dao.impl.ArchetypeBeanDaoHibernateImpl;
-import edu.zju.bme.hibernarm.management.dao.virtual.ARMBeanDao;
-import edu.zju.bme.hibernarm.management.dao.virtual.ArchetypeBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ARMBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ARMBeanDaoImpl;
+import edu.zju.bme.hibernarm.management.dao.ArchetypeBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ArchetypeBeanDaoImpl;
 import edu.zju.bme.hibernarm.management.model.ARMBean;
 import edu.zju.bme.hibernarm.management.model.ArchetypeBean;
 import edu.zju.bme.hibernarm.management.util.HibernateUtil;
@@ -12,8 +12,8 @@ public class DisplayContentAction {
 	private String keyName;
 	private ArchetypeBean archetypeBean;
 	private ARMBean armBean;
-	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
-	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
+	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoImpl();
+	private static ARMBeanDao armBeanDao = new ARMBeanDaoImpl();
 
 	public String getKeyName() {
 		return keyName;

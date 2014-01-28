@@ -9,7 +9,7 @@ public class HibernarmReconfigureAction {
 	public String execute() {
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"applicationContext.xml", HibernarmReconfigureAction.class);
+				"/beans.xml", HibernarmReconfigureAction.class);
 		AQLExecute client = (AQLExecute) context.getBean("wsclient");
 
 		HibernarmControl control = new HibernarmControl();

@@ -1,17 +1,16 @@
-package edu.zju.bme.hibernarm.management.dao.impl;
+package edu.zju.bme.hibernarm.management.dao;
 
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import edu.zju.bme.hibernarm.management.dao.virtual.ARMBeanDao;
 import edu.zju.bme.hibernarm.management.model.ARMBean;
 import edu.zju.bme.hibernarm.management.model.HistoriedARMBean;
 import edu.zju.bme.hibernarm.management.util.CommitSequenceConstant;
 import edu.zju.bme.hibernarm.management.util.HibernateUtil;
 
-public class ARMBeanDaoHibernateImpl implements ARMBeanDao {
+public class ARMBeanDaoImpl implements ARMBeanDao {
 	public void saveOrUpdate(ARMBean bean, Session session) {
 		HistoriedARMBean historiedARMBean = new HistoriedARMBean();
 		historiedARMBean.setCommitSequence(bean.getCommitSequence());

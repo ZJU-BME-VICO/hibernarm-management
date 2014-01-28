@@ -13,12 +13,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.zju.bme.hibernarm.management.control.action.HibernarmControl;
 import edu.zju.bme.hibernarm.management.control.action.HibernarmControlAction;
-import edu.zju.bme.hibernarm.management.dao.impl.ARMBeanDaoHibernateImpl;
-import edu.zju.bme.hibernarm.management.dao.impl.ArchetypeBeanDaoHibernateImpl;
-import edu.zju.bme.hibernarm.management.dao.impl.CommitSequenceDaoHibernateImpl;
-import edu.zju.bme.hibernarm.management.dao.virtual.ARMBeanDao;
-import edu.zju.bme.hibernarm.management.dao.virtual.ArchetypeBeanDao;
-import edu.zju.bme.hibernarm.management.dao.virtual.CommitSequenceDao;
+import edu.zju.bme.hibernarm.management.dao.ARMBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ARMBeanDaoImpl;
+import edu.zju.bme.hibernarm.management.dao.ArchetypeBeanDao;
+import edu.zju.bme.hibernarm.management.dao.ArchetypeBeanDaoImpl;
+import edu.zju.bme.hibernarm.management.dao.CommitSequenceDao;
+import edu.zju.bme.hibernarm.management.dao.CommitSequenceDaoImpl;
 import edu.zju.bme.hibernarm.management.exception.HibernarmValidationException;
 import edu.zju.bme.hibernarm.management.exception.RestoreFileException;
 import edu.zju.bme.hibernarm.management.exception.SaveFileException;
@@ -41,9 +41,9 @@ public class FileUploadAction {
 	private String[] uploadContentType;
 	private String uploadResult;
 	private String uploadResultDescription;
-	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoHibernateImpl();
-	private static ARMBeanDao armBeanDao = new ARMBeanDaoHibernateImpl();
-	private static CommitSequenceDao commitSequenceDao = new CommitSequenceDaoHibernateImpl();
+	private static ArchetypeBeanDao archetypeBeanDao = new ArchetypeBeanDaoImpl();
+	private static ARMBeanDao armBeanDao = new ARMBeanDaoImpl();
+	private static CommitSequenceDao commitSequenceDao = new CommitSequenceDaoImpl();
 
 	public File[] getUpload() {
 		return upload;
@@ -180,7 +180,7 @@ public class FileUploadAction {
 		try {
 			@SuppressWarnings("resource")
 			ApplicationContext context = new ClassPathXmlApplicationContext(
-					"applicationContext.xml", HibernarmControlAction.class);
+					"/beans.xml", HibernarmControlAction.class);
 			AQLExecute client = (AQLExecute) context
 					.getBean("wsclientvalidation");
 
