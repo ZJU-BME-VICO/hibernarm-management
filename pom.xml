@@ -46,12 +46,12 @@
 			<id>test</id>
 			<properties>
 				<env>test</env>
-				<tomcat.url>http://localhost:${tomcat.port}/manager/text</tomcat.url>
-				<database.url>jdbc:sqlserver://localhost:1433;DatabaseName=hibernarm-management</database.url>
+				<tomcat.url>http://172.16.100.63:${tomcat.port}/manager/text</tomcat.url>
+				<database.url>jdbc:sqlserver://172.16.100.33;instanceName=CDR;databaseName=hibernarm-management</database.url>
 				<database.username>sa</database.username>
-				<database.password>sa</database.password>
-				<hibernarm.service.AQLExecute.url>http://localhost:9091/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
-				<hibernarm.validation.AQLExecute.url>http://localhost:9093/hibernarm-validation/AQLExecute</hibernarm.validation.AQLExecute.url>
+				<database.password>@Sxdyy0808</database.password>
+				<hibernarm.service.AQLExecute.url>http://172.16.100.63:9091/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
+				<hibernarm.validation.AQLExecute.url>http://172.16.100.63:9093/hibernarm-validation/AQLExecute</hibernarm.validation.AQLExecute.url>
 			</properties>
 		</profile>
 	</profiles>
@@ -96,7 +96,7 @@
 							<sourceRoot>${basedir}/target/generated-sources</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<wsdl>http://localhost:9091/hibernarm-service/AQLExecute?wsdl</wsdl>
+									<wsdl>${hibernarm.service.AQLExecute.url}?wsdl</wsdl>
 								</wsdlOption>
 							</wsdlOptions>
 						</configuration>
