@@ -54,6 +54,18 @@
 				<hibernarm.validation.AQLExecute.url>http://172.16.100.63:9093/hibernarm-validation/AQLExecute</hibernarm.validation.AQLExecute.url>
 			</properties>
 		</profile>
+		<profile>
+			<id>testzju</id>
+			<properties>
+				<env>testzju</env>
+				<tomcat.url>http://eric-pc:${tomcat.port}/manager/text</tomcat.url>
+				<database.url>jdbc:sqlserver://eric-pc:1433;DatabaseName=hibernarm-management</database.url>
+				<database.username>sa</database.username>
+				<database.password>sa</database.password>
+				<hibernarm.service.AQLExecute.url>http://eric-pc:9091/hibernarm-service/AQLExecute</hibernarm.service.AQLExecute.url>
+				<hibernarm.validation.AQLExecute.url>http://eric-pc:9093/hibernarm-validation/AQLExecute</hibernarm.validation.AQLExecute.url>
+			</properties>
+		</profile>
 	</profiles>
 
 	<build>
